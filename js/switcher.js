@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function renderEvents(events) {
+        currentIndex = 0;
         container.innerHTML = "";
         
         if (events.length === 0) {
@@ -214,6 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (totalCards <= 1) {
             if (prevBtn) prevBtn.style.display = "none";
             if (nextBtn) nextBtn.style.display = "none";
+            container.style.transform = "translateX(0%)";
             return;
         } else {
             if (prevBtn) prevBtn.style.display = "flex";
