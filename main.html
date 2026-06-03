@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
+
+
 <body>
     <div class="background-stripes"></div>
-
-
 
 
 
@@ -23,7 +23,8 @@
     <!-- HEADER -->
     <header class="top-header">
         <div class="logo-container">
-            <img src="./assets/img/logo2%20dark.svg" alt="Logo NovaVilla">
+            <img src="./assets/img/logo2%20dark.svg" alt="Logo NovaVilla" class="logo-dark">
+            <img src="./assets/img/logo2%20light.svg" alt="Logo NovaVilla" class="logo-light">
         </div>
 
         <h1 class="header-title">Nova Villa</h1>
@@ -46,9 +47,10 @@
             <a href="./html/event.html" class="nav-link">Événements</a>
             <a href="./html/partner.html" class="nav-link">Partenaires</a>
         </nav>
-        <div class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
+        <input type="checkbox" id="burger-checkbox" class="burger-checkbox" style="display:none;">
+        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
             <i class="fa-solid fa-bars fa-2x"></i>
-        </div>
+        </label>
     </header>
 
 
@@ -70,13 +72,15 @@
         
         <div class="desktop-left">
             <div class="categories-wrapper">
-                <div class="button-categories" id="categories-btn" role="button" tabindex="0" aria-label="Filtrer les événements par catégorie" aria-haspopup="listbox">Catégories</div>
+                <input type="checkbox" id="categories-checkbox" class="categories-toggle-checkbox" style="display:none;">
+                <label for="categories-checkbox" class="button-categories" id="categories-btn" role="button" tabindex="0" aria-label="Filtrer les événements par catégorie" aria-haspopup="listbox">Catégories</label>
+                <label for="categories-checkbox" class="categories-overlay-close" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:90; cursor:default;"></label>
                 <div class="categories-menu" id="categories-menu">
-                    <div class="category-option" data-category="Tous">Tous</div>
-                    <div class="category-option" data-category="Sportif">Sportif</div>
-                    <div class="category-option" data-category="Concert">Concert</div>
-                    <div class="category-option" data-category="Famille">Famille</div>
-                    <div class="category-option" data-category="Festival">Festival</div>
+                    <label for="categories-checkbox" class="category-option" data-category="Tous">Tous</label>
+                    <label for="categories-checkbox" class="category-option" data-category="Sportif">Sportif</label>
+                    <label for="categories-checkbox" class="category-option" data-category="Concert">Concert</label>
+                    <label for="categories-checkbox" class="category-option" data-category="Famille">Famille</label>
+                    <label for="categories-checkbox" class="category-option" data-category="Festival">Festival</label>
                 </div>
             </div>
 
@@ -211,7 +215,7 @@
     <!-- Burger Menu Overlay -->
     <div id="burger-menu" class="burger-overlay">
         <div class="menu-content">
-            <span class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</span>
+            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</label>
             <nav class="menu-nav">
                 <a href="./main.html" class="menu-link">Accueil</a>
                 <a href="./html/news.html" class="menu-link">News</a>

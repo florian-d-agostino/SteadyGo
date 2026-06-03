@@ -1,0 +1,198 @@
+
+
+
+// ======================= PARTNERS PAGE STYLES =======================
+.partners-page-container
+    &.main-container
+        align-items: center
+
+.partners-frame
+    background-color: rgba(23, 22, 48, 0.7)
+    border: 1.5px solid rgba(176, 0, 255, 0.25)
+    border-radius: 15px
+    padding: 25px 15px
+    display: flex
+    flex-direction: column
+    gap: 30px
+    max-width: 600px
+    width: 100%
+    margin: 0 auto 40px auto
+    box-sizing: border-box
+    box-shadow: 0 0 20px rgba(176, 0, 255, 0.1)
+
+    @media (min-width: 1024px)
+        max-width: 1200px
+        display: grid
+        grid-template-columns: repeat(2, 1fr)
+        gap: 40px 30px
+        padding: 40px 30px
+
+    .partner-item
+        display: flex
+        flex-direction: column
+        width: 100%
+        transition: transform 0.3s ease
+
+        &:hover
+            transform: translateY(-3px)
+
+    .partner-card
+        background-color: #ffffff
+        color: #121128
+        border-radius: 8px
+        padding: 15px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 90%
+        box-sizing: border-box
+        font-weight: bold
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15)
+        border: 1px solid rgba(255, 255, 255, 0.1)
+        z-index: 2
+
+        .partner-logo
+            display: flex
+            align-items: center
+            gap: 10px
+            font-family: $font-family
+            font-size: 0.95rem
+
+        .partner-tag
+            font-size: 0.7rem
+            padding: 3px 8px
+            border-radius: 12px
+            font-weight: bold
+            text-transform: uppercase
+
+            &.tag-concert
+                background-color: rgba(255, 41, 117, 0.1)
+                color: $color-pink
+                border: 1px solid rgba(255, 41, 117, 0.3)
+
+            &.tag-sportif
+                background-color: rgba(23, 255, 98, 0.1)
+                color: $color-green
+                border: 1px solid rgba(23, 255, 98, 0.3)
+
+            &.tag-famille
+                background-color: rgba(255, 211, 25, 0.1)
+                color: $color-yellow
+                border: 1px solid rgba(255, 211, 25, 0.3)
+
+            &.tag-festival
+                background-color: rgba(176, 0, 255, 0.1)
+                color: $color-violet
+                border: 1px solid rgba(176, 0, 255, 0.3)
+
+    .partner-action
+        background-color: #3b2054
+        color: #fff
+        border-radius: 8px
+        padding: 12px 15px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 90%
+        box-sizing: border-box
+        align-self: flex-end
+        margin-top: -8px
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25)
+        font-size: 0.8rem
+        z-index: 1
+
+        .action-text
+            font-size: 0.8rem
+            color: rgba(255, 255, 255, 0.8)
+
+        .action-btn
+            background-color: $color-yellow
+            color: $color-dark-blue
+            text-decoration: none
+            padding: 6px 12px
+            border-radius: 15px
+            font-weight: bold
+            font-size: 0.75rem
+            display: inline-flex
+            align-items: center
+            gap: 5px
+            transition: all 0.2s
+
+            &:hover
+                background-color: darken($color-yellow, 5%)
+
+@media (min-width: 1024px)
+    .main-container.partners-page-container
+        flex-direction: column
+        align-items: stretch
+        gap: 20px
+
+
+
+
+
+
+// ======================= PARTNERS CSS FILTER =======================
+body:has(#pcat-sportif:checked) .partner-item:not(:has(.tag-sportif))
+    display: none
+
+body:has(#pcat-concert:checked) .partner-item:not(:has(.tag-concert))
+    display: none
+
+body:has(#pcat-famille:checked) .partner-item:not(:has(.tag-famille))
+    display: none
+
+body:has(#pcat-festival:checked) .partner-item:not(:has(.tag-festival))
+    display: none
+
+body:has(#pcat-all:checked) label[for="pcat-all"],
+body:has(#pcat-sportif:checked) label[for="pcat-sportif"],
+body:has(#pcat-concert:checked) label[for="pcat-concert"],
+body:has(#pcat-famille:checked) label[for="pcat-famille"],
+body:has(#pcat-festival:checked) label[for="pcat-festival"]
+    background: rgba(255, 211, 25, 0.3)
+    color: $color-yellow
+    font-weight: bold
+
+body:has(#theme-checkbox:checked):has(#pcat-all:checked) label[for="pcat-all"],
+body:has(#theme-checkbox:checked):has(#pcat-sportif:checked) label[for="pcat-sportif"],
+body:has(#theme-checkbox:checked):has(#pcat-concert:checked) label[for="pcat-concert"],
+body:has(#theme-checkbox:checked):has(#pcat-famille:checked) label[for="pcat-famille"],
+body:has(#theme-checkbox:checked):has(#pcat-festival:checked) label[for="pcat-festival"]
+    background-color: $color-violet
+    color: #ffffff
+    font-weight: bold
+
+
+
+
+
+
+
+// ======================= LIGHT THEME OVERRIDES =======================
+body:has(#theme-checkbox:checked)
+    .partners-frame
+        background-color: rgba(255, 255, 255, 0.9)
+        border-color: rgba(176, 0, 255, 0.2)
+        box-shadow: 0 10px 30px rgba(176, 0, 255, 0.05)
+
+        .partner-card
+            background-color: #ffffff
+            color: #121128
+            border: 1px solid rgba(176, 0, 255, 0.15)
+            box-shadow: 0 4px 15px rgba(176, 0, 255, 0.08)
+
+        .partner-action
+            background-color: #E2DAF5
+            color: #121128
+            box-shadow: 0 4px 15px rgba(176, 0, 255, 0.05)
+
+            .action-text
+                color: rgba(18, 17, 40, 0.8)
+
+            .action-btn
+                background-color: $color-violet
+                color: #fff
+
+                &:hover
+                    background-color: darken($color-violet, 10%)

@@ -19,7 +19,8 @@
     <!-- HEADER -->
     <header class="top-header">
         <div class="logo-container">
-            <img src="../assets/img/logo2%20dark.svg" alt="Logo NovaVilla">
+            <img src="../assets/img/logo2%20dark.svg" alt="Logo NovaVilla" class="logo-dark">
+            <img src="../assets/img/logo2%20light.svg" alt="Logo NovaVilla" class="logo-light">
         </div>
 
         <h1 class="header-title">Nova Villa</h1>
@@ -42,9 +43,10 @@
             <a href="./event.html" class="nav-link">Événements</a>
             <a href="./partner.html" class="nav-link">Partenaires</a>
         </nav>
-        <div class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
+        <input type="checkbox" id="burger-checkbox" class="burger-checkbox" style="display:none;">
+        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
             <i class="fa-solid fa-bars fa-2x"></i>
-        </div>
+        </label>
     </header>
 
     <!-- MAIN CONTENT -->
@@ -62,22 +64,22 @@
             <h3 class="news-section-title">Filtrer par thématique :</h3>
             <div class="news-categories">
                 <label class="category-checkbox-pill sportif">
-                    <input type="checkbox" value="Sportif" checked>
+                    <input type="checkbox" id="check-sportif" value="Sportif" checked>
                     <span class="pill-check"><i class="fa-solid fa-check"></i></span>
                     <span class="pill-label">Sportif</span>
                 </label>
                 <label class="category-checkbox-pill concert">
-                    <input type="checkbox" value="Concert" checked>
+                    <input type="checkbox" id="check-concert" value="Concert" checked>
                     <span class="pill-check"><i class="fa-solid fa-check"></i></span>
                     <span class="pill-label">Concert</span>
                 </label>
                 <label class="category-checkbox-pill famille">
-                    <input type="checkbox" value="Famille" checked>
+                    <input type="checkbox" id="check-famille" value="Famille" checked>
                     <span class="pill-check"><i class="fa-solid fa-check"></i></span>
                     <span class="pill-label">Famille</span>
                 </label>
                 <label class="category-checkbox-pill festival">
-                    <input type="checkbox" value="Festival" checked>
+                    <input type="checkbox" id="check-festival" value="Festival" checked>
                     <span class="pill-check"><i class="fa-solid fa-check"></i></span>
                     <span class="pill-label">Festival</span>
                 </label>
@@ -86,6 +88,119 @@
 
         <!-- NEWS LISTING CONTAINER -->
         <section class="news-grid" id="news-container">
+            <!-- Message d'avertissement si aucun filtre n'est coché -->
+            <div class="empty-news-message">
+                <p><i class="fa-solid fa-circle-exclamation fa-2x"></i></p>
+                <p style="margin-top:10px;">Veuillez cocher au moins une catégorie pour afficher les actualités.</p>
+            </div>
+
+            <!-- Card 1 -->
+            <article class="news-card concert fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/concert.jpg" alt="Ouverture officielle de la saison NovaVilla" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge concert">Concert</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 25 Avril 2026</span>
+                    </div>
+                    <h3 class="news-card-title">Ouverture officielle de la saison NovaVilla</h3>
+                    <p class="news-card-desc">Découvrez notre nouvelle programmation artistique et notre scène de concert rétro futuriste face au Vieux-Port. Une expérience visuelle et acoustique inédite vous attend.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="news-card sportif fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/sportif - tennis.jpg" alt="Le Tournoi de Tennis amateur de la Corniche" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge sportif">Sportif</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 30 Avril 2026</span>
+                    </div>
+                    <h3 class="news-card-title">Le Tournoi de Tennis amateur de la Corniche</h3>
+                    <p class="news-card-desc">Inscrivez-vous dès aujourd'hui pour participer au tournoi annuel de tennis sur terre battue. De superbes prix NovaVilla et partenaires sont à gagner pour toutes les tranches d'âge.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="news-card festival fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/festival.jpg" alt="Le Grand Festival des Arts de Rue de Marseille" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge festival">Festival</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 04 Mai 2026</span>
+                    </div>
+                    <h3 class="news-card-title">Le Grand Festival des Arts de Rue de Marseille</h3>
+                    <p class="news-card-desc">Rejoignez-nous sur l'Esplanade de la Major pour trois jours de spectacles vivants, d'expositions éphémères et de performances néons nocturnes d'artistes locaux.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="news-card famille fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/famille.jpg" alt="Chasse au trésor géante pour toute la famille" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge famille">Famille</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 10 Mai 2026</span>
+                    </div>
+                    <h3 class="news-card-title">Chasse au trésor géante pour toute la famille</h3>
+                    <p class="news-card-desc">Une aventure ludique au coeur des parcs marseillais pour petits et grands. Résolvez les énigmes de la Villa, gagnez des indices et partagez un goûter festif géant.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="news-card festival fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/festival.jpg" alt="NovaVilla s'associe aux artistes locaux" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge festival">Festival</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 14 Mai 2026</span>
+                    </div>
+                    <h3 class="news-card-title">NovaVilla s'associe aux artistes locaux</h3>
+                    <p class="news-card-desc">Une nouvelle exposition d'art contemporain et rétro-synthwave s'installe dans nos murs. Entrée libre tous les weekends de mai pour un voyage sensoriel unique.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="news-card sportif fade-in">
+                <div class="news-card-img-wrapper">
+                    <img src="../assets/img/sportif - tennis.jpg" alt="Cours de yoga collectif face à la mer" onerror="this.src='../assets/map.png';">
+                    <span class="category-badge sportif">Sportif</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar-days"></i> 18 Mai 2026</span>
+                    </div>
+                    <h3 class="news-card-title">Cours de yoga collectif face à la mer</h3>
+                    <p class="news-card-desc">Prenez un instant pour respirer chaque dimanche matin. Une séance de yoga encadrée par des professionnels, ouverte à tous les niveaux avec vue imprenable sur l'horizon.</p>
+                    <button class="news-card-btn" onclick="alert('Cet article complet sera disponible très prochainement !')">
+                        Lire la suite <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </article>
         </section>
 
         <!-- NEWSLETTER SUBSCRIPTION BOX -->
@@ -96,7 +211,7 @@
                 <input type="email" id="subscribe-email" class="newsletter-input" placeholder="Saisissez votre adresse e-mail" aria-label="Saisissez votre adresse e-mail pour vous abonner" required>
                 <button type="submit" class="newsletter-btn">S'abonner</button>
             </form>
-            <button id="unsubscribe-trigger" class="unsubscribe-trigger-btn">Se désabonner de la newsletter</button>
+            <label for="unsubscribe-checkbox" id="unsubscribe-trigger" class="unsubscribe-trigger-btn" role="button" style="display:inline-block; text-align:center;">Se désabonner de la newsletter</label>
         </section>
 
     </main>
@@ -128,7 +243,7 @@
     <!-- Burger Menu Overlay -->
     <div id="burger-menu" class="burger-overlay">
         <div class="menu-content">
-            <span class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</span>
+            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</label>
             <nav class="menu-nav">
                 <a href="../main.html" class="menu-link">Accueil</a>
                 <a href="./news.html" class="menu-link">News</a>
@@ -138,10 +253,11 @@
         </div>
     </div>
 
+    <input type="checkbox" id="unsubscribe-checkbox" class="modal-checkbox" style="display:none;">
     <!-- Unsubscribe Modal Popup -->
     <div id="unsubscribe-modal" class="calendar-overlay">
         <div class="calendar-container" style="max-width: 400px; padding: 30px; position: relative;">
-            <span class="close-modal-btn" id="close-unsubscribe" role="button" tabindex="0" aria-label="Fermer la fenêtre de désinscription" style="position: absolute; top: 12px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #FF2975; transition: transform 0.2s;">&times;</span>
+            <label for="unsubscribe-checkbox" class="close-modal-btn" id="close-unsubscribe" role="button" tabindex="0" aria-label="Fermer la fenêtre de désinscription" style="position: absolute; top: 12px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #FF2975; transition: transform 0.2s; display: block; line-height: 1;">&times;</label>
             <h3 style="font-family: var(--font-family); color: #fff; text-align: center; margin-bottom: 15px; text-transform: uppercase; font-size: 1.1rem; text-shadow: 0 0 10px #FF2975;">Désinscription</h3>
             <p style="font-size: 0.8rem; color: #d4d4d4; text-align: center; margin-bottom: 25px; line-height: 1.4;">Entrez l'adresse e-mail avec laquelle vous êtes inscrit pour confirmer votre désabonnement.</p>
             <form id="unsubscribe-form" style="display: flex; flex-direction: column; gap: 15px;">

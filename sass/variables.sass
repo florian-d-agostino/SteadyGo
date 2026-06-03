@@ -1,0 +1,24 @@
+// ======================= COLORS =======================
+$color-dark-blue: #121128
+$color-deep-dark-blue: #050415
+$color-yellow: #FFD319
+$color-pink: #FF2975
+$color-green: #17FF62
+$color-purple: #290d27ff
+$color-violet: #B000FF
+$color-element-grey: #d4d4d4
+
+// ======================= FONTS =======================
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap')
+
+$font-family: 'Outfit', sans-serif
+
+// ======================= LAYOUT =======================
+$app-width: 400px
+
+// ======================= FUNCTIONS =======================
+@function stars($n)
+    $value: '#{random(2000)}px #{random(2000)}px #FFF'
+    @for $i from 2 through $n
+        $value: '#{$value}, #{random(2000)}px #{random(2000)}px #FFF'
+    @return unquote($value)

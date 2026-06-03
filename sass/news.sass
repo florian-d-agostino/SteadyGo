@@ -1,0 +1,489 @@
+
+
+
+
+// ======================= NEWS PAGE STYLES =======================
+.news-categories-section
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 12px
+    width: 100%
+    max-width: 1200px
+    margin: 0 auto 20px auto
+
+    .news-section-title
+        font-family: $font-family
+        font-size: 0.85rem
+        text-transform: uppercase
+        color: rgba(255, 255, 255, 0.6)
+        letter-spacing: 1px
+        margin: 0
+
+.news-categories
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    gap: 12px
+    width: 100%
+
+    .category-checkbox-pill
+        display: inline-flex
+        align-items: center
+        gap: 8px
+        padding: 8px 16px
+        border-radius: 20px
+        border: 2px solid transparent
+        cursor: pointer
+        transition: all 0.25s ease
+        user-select: none
+        font-size: 0.85rem
+        font-weight: bold
+        background-color: rgba(255, 255, 255, 0.05)
+        border-color: rgba(255, 255, 255, 0.15)
+        color: rgba(255, 255, 255, 0.6)
+
+        input[type="checkbox"]
+            display: none
+
+        .pill-check
+            display: inline-flex
+            align-items: center
+            justify-content: center
+            width: 14px
+            height: 14px
+            border-radius: 3px
+            border: 1.5px solid rgba(255, 255, 255, 0.4)
+            font-size: 0.65rem
+            color: transparent
+            transition: all 0.2s
+
+        &.sportif:has(input:checked)
+            background-color: rgba(23, 255, 98, 0.12)
+            border-color: $color-green
+            color: #fff
+            box-shadow: 0 0 10px rgba(23, 255, 98, 0.3)
+            .pill-check
+                background-color: $color-green
+                border-color: $color-green
+                color: #121128
+
+        &.concert:has(input:checked)
+            background-color: rgba(255, 41, 117, 0.12)
+            border-color: $color-pink
+            color: #fff
+            box-shadow: 0 0 10px rgba(255, 41, 117, 0.3)
+            .pill-check
+                background-color: $color-pink
+                border-color: $color-pink
+                color: #fff
+
+        &.famille:has(input:checked)
+            background-color: rgba(255, 211, 25, 0.12)
+            border-color: $color-yellow
+            color: #fff
+            box-shadow: 0 0 10px rgba(255, 211, 25, 0.3)
+            .pill-check
+                background-color: $color-yellow
+                border-color: $color-yellow
+                color: #121128
+
+        &.festival:has(input:checked)
+            background-color: rgba(176, 0, 255, 0.12)
+            border-color: $color-violet
+            color: #fff
+            box-shadow: 0 0 10px rgba(176, 0, 255, 0.3)
+            .pill-check
+                background-color: $color-violet
+                border-color: $color-violet
+                color: #fff
+
+.news-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+    gap: 25px
+    width: 100%
+    max-width: 1200px
+    margin: 0 auto
+    padding: 10px 10px 40px 10px
+    box-sizing: border-box
+
+@media (min-width: 1024px)
+    .news-grid
+        padding: 10px 0 40px 0
+
+.news-card
+    background-color: #171630
+    border-radius: 15px
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    border: 1px solid rgba(255, 255, 255, 0.05)
+    transition: transform 0.3s ease, box-shadow 0.3s ease
+
+    &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4)
+
+    .news-card-img-wrapper
+        height: 180px
+        width: 100%
+        overflow: hidden
+        position: relative
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            transition: transform 0.5s ease
+
+        &:hover img
+            transform: scale(1.08)
+
+        .category-badge
+            position: absolute
+            top: 12px
+            right: 12px
+            padding: 4px 10px
+            border-radius: 20px
+            font-size: 0.65rem
+            font-weight: bold
+            text-transform: uppercase
+            color: #fff
+
+            &.sportif
+                background-color: $color-green
+                box-shadow: 0 0 10px $color-green
+
+            &.concert
+                background-color: $color-pink
+                box-shadow: 0 0 10px $color-pink
+
+            &.famille
+                background-color: $color-yellow
+                color: #121128
+                box-shadow: 0 0 10px $color-yellow
+
+            &.festival
+                background-color: $color-violet
+                box-shadow: 0 0 10px $color-violet
+
+    .news-card-content
+        padding: 20px
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        gap: 12px
+
+        .news-card-meta
+            display: flex
+            justify-content: space-between
+            align-items: center
+            font-size: 0.75rem
+            color: #a0aec0
+
+            i
+                color: $color-pink
+                margin-right: 4px
+
+        .news-card-title
+            font-family: $font-family
+            font-size: 1.15rem
+            color: #fff
+            margin: 0
+            line-height: 1.3
+
+        .news-card-desc
+            font-size: 0.85rem
+            color: #cbd5e0
+            line-height: 1.5
+            margin: 0
+
+        .news-card-btn
+            align-self: flex-start
+            color: $color-yellow
+            font-weight: bold
+            cursor: pointer
+            transition: color 0.2s, transform 0.2s
+            font-size: 0.85rem
+            border: none
+            background: none
+            padding: 0
+            display: flex
+            align-items: center
+            gap: 6px
+            font-family: $font-family
+
+            &:hover
+                color: darken($color-yellow, 10%)
+                transform: translateX(3px)
+
+.newsletter-section
+    background: linear-gradient(135deg, rgba(23, 22, 48, 0.9) 0%, rgba(35, 12, 57, 0.9) 100%)
+    padding: 35px 25px
+    border-radius: 15px
+    border: 1.5px solid rgba(176, 0, 255, 0.25)
+    box-shadow: 0 0 20px rgba(176, 0, 255, 0.15)
+    margin: 40px auto
+    text-align: center
+    max-width: 600px
+    width: 100%
+    box-sizing: border-box
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 15px
+
+    .newsletter-title
+        font-family: $font-family
+        font-size: 1.3rem
+        color: #fff
+        margin: 0
+        text-transform: uppercase
+        text-shadow: 0 0 10px $color-violet
+
+    .newsletter-desc
+        font-size: 0.8rem
+        color: #cbd5e0
+        line-height: 1.4
+        margin: 0
+        max-width: 500px
+
+    .newsletter-form
+        display: flex
+        flex-direction: column
+        gap: 12px
+        width: 100%
+        max-width: 480px
+        margin-top: 10px
+
+    .newsletter-input
+        flex: 1
+        padding: 12px 20px
+        border-radius: 25px
+        border: 1.5px solid rgba(255, 255, 255, 0.15)
+        background-color: rgba(255, 255, 255, 0.05)
+        color: #fff
+        font-size: 0.9rem
+        transition: border-color 0.2s, background-color 0.2s
+
+        &:focus
+            border-color: $color-yellow
+            outline: none
+            background-color: rgba(255, 255, 255, 0.1)
+
+    .newsletter-btn
+        padding: 12px 30px
+        border-radius: 25px
+        border: none
+        background-color: $color-yellow
+        color: $color-dark-blue
+        font-weight: bold
+        font-family: $font-family
+        font-size: 0.9rem
+        cursor: pointer
+        transition: transform 0.2s, background-color 0.2s
+
+        &:hover
+            transform: scale(1.02)
+            background-color: darken($color-yellow, 5%)
+
+    .unsubscribe-trigger-btn
+        margin-top: 10px
+        background-color: transparent
+        border: 1.5px solid #FF2975
+        color: #FF2975
+        font-family: $font-family
+        padding: 10px 25px
+        border-radius: 25px
+        font-weight: bold
+        cursor: pointer
+        transition: all 0.2s
+        font-size: 0.85rem
+
+        &:hover
+            background-color: #FF2975
+            color: #fff
+            box-shadow: 0 0 15px rgba(255, 41, 117, 0.4)
+
+@media (min-width: 768px)
+    .newsletter-section
+        .newsletter-form
+            flex-direction: row
+
+.empty-news-message
+    grid-column: 1 / -1
+    text-align: center
+    padding: 60px 20px
+    font-size: 0.9rem
+    color: #cbd5e0
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 10px
+
+    i
+        color: $color-pink
+
+@media (min-width: 1024px)
+    .main-container.news-page-container
+        flex-direction: column
+        align-items: stretch
+        gap: 20px
+
+
+
+
+
+
+
+// ======================= NEWS CSS FILTER =======================
+body:has(#check-sportif:not(:checked)) .news-card.sportif
+    display: none
+
+body:has(#check-concert:not(:checked)) .news-card.concert
+    display: none
+
+body:has(#check-famille:not(:checked)) .news-card.famille
+    display: none
+
+body:has(#check-festival:not(:checked)) .news-card.festival
+    display: none
+
+.empty-news-message
+    display: none
+
+body:has(#check-sportif:not(:checked)):has(#check-concert:not(:checked)):has(#check-famille:not(:checked)):has(#check-festival:not(:checked))
+    .empty-news-message
+        display: block
+
+
+
+
+
+
+
+
+
+// ======================= LIGHT THEME OVERRIDES =======================
+body:has(#theme-checkbox:checked)
+    .news-categories-section
+        .news-section-title
+            color: rgba(18, 17, 40, 0.6)
+
+    .category-checkbox-pill
+        background-color: rgba(18, 17, 40, 0.03)
+        border-color: rgba(18, 17, 40, 0.1)
+        color: rgba(18, 17, 40, 0.6)
+
+        .pill-check
+            border-color: rgba(18, 17, 40, 0.3)
+
+        &.sportif:has(input:checked)
+            background-color: #F0FDF4
+            border-color: $color-green
+            color: #121128
+            box-shadow: none
+            .pill-check
+                background-color: $color-green
+                border-color: $color-green
+                color: #121128
+
+        &.concert:has(input:checked)
+            background-color: #FFF1F2
+            border-color: $color-pink
+            color: #121128
+            box-shadow: none
+            .pill-check
+                background-color: $color-pink
+                border-color: $color-pink
+                color: #fff
+
+        &.famille:has(input:checked)
+            background-color: #FEFCE8
+            border-color: $color-yellow
+            color: #121128
+            box-shadow: none
+            .pill-check
+                background-color: $color-yellow
+                border-color: $color-yellow
+                color: #121128
+
+        &.festival:has(input:checked)
+            background-color: #FAF5FF
+            border-color: $color-violet
+            color: #121128
+            box-shadow: none
+            .pill-check
+                background-color: $color-violet
+                border-color: $color-violet
+                color: #fff
+
+    .news-card
+        background-color: #ffffff
+        border: 1px solid rgba(176, 0, 255, 0.12)
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05)
+
+        .news-card-content
+            .news-card-title
+                color: #121128
+            .news-card-desc
+                color: #4a5568
+            .news-card-meta
+                color: #718096
+                i
+                    color: $color-pink
+            .news-card-btn
+                color: $color-violet
+                &:hover
+                    color: darken($color-violet, 10%)
+
+        .news-card-img-wrapper
+            .category-badge
+                &.sportif
+                    background-color: $color-green
+                    color: #121128
+                    box-shadow: none
+                &.concert
+                    background-color: $color-pink
+                    color: #fff
+                    box-shadow: none
+                &.famille
+                    background-color: $color-yellow
+                    color: #121128
+                    box-shadow: none
+                &.festival
+                    background-color: $color-violet
+                    color: #fff
+                    box-shadow: none
+
+    .newsletter-section
+        background: linear-gradient(135deg, #ffffff 0%, #FAF5FF 100%)
+        border-color: rgba(176, 0, 255, 0.2)
+        box-shadow: 0 10px 30px rgba(176, 0, 255, 0.05)
+
+        .newsletter-title
+            color: #121128
+            text-shadow: none
+        .newsletter-desc
+            color: #4a5568
+        .newsletter-input
+            border-color: rgba(18, 17, 40, 0.15)
+            background-color: #fff
+            color: #121128
+            &:focus
+                border-color: $color-violet
+        .newsletter-btn
+            background-color: $color-violet
+            color: #fff
+            &:hover
+                background-color: darken($color-violet, 10%)
+        .unsubscribe-trigger-btn
+            border-color: #FF2975
+            color: #FF2975
+            &:hover
+                background-color: #FF2975
+                color: #fff
+
+    .empty-news-message
+        color: #121128

@@ -9,10 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const OPENAGENDA_API_KEY = "512a334322fe409fbbfb9da05c29440a";
     const OPENAGENDA_UID = "21769447";  
 
-
-
-
-
     const MOCK_EVENTS = [
         {
             title: "Festival des Arts",
@@ -44,14 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-
-
-
-
     let originalEventsList = [];
     let savedDateStr = localStorage.getItem('novaVillaSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
-
 
     async function initApp() {
         if (!OPENAGENDA_API_KEY || !OPENAGENDA_UID) {
@@ -69,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const response = await fetch(url);
-            
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
@@ -114,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
         targetDate.setHours(0, 0, 0, 0);
 
         const filtered = originalEventsList.filter(event => {
-
             if (event.timings && event.timings.length > 0) {
                 return event.timings.some(timing => {
                     const endDate = new Date(timing.end);
@@ -123,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
             
-
             const dateStr = event.date;
             if (dateStr) {
                 if (dateStr.includes("-")) {
@@ -150,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
         filterAndDisplayEvents();
     });
 
-
     function renderEvents(events) {
         container.innerHTML = "";
         
@@ -176,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const address = event.location?.name || event.location?.address || "Location unspecified";
             const bookingUrl = event.registration?.[0]?.value || `https://openagenda.com/villanova/events/${event.slug}` || "#";
 
-
             let fallbackImg = "./assets/img/festival.jpg";
             const titleText = title.toLowerCase();
             if (titleText.includes("concert") || titleText.includes("jazz") || titleText.includes("musique")) {
@@ -186,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (titleText.includes("famille") || titleText.includes("enfant") || titleText.includes("atelier")) {
                 fallbackImg = "./assets/img/famille.jpg";
             }
-
 
             let imageUrl = fallbackImg;
             if (event.image) {
@@ -262,8 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchStartX = 0;
     container.addEventListener("touchstart", e => touchStartX = e.changedTouches[0].screenX, { passive: true });
 
-
-    // --- TOUCH SWIPE ---
     container.addEventListener("touchend", e => {
         const touchEndX = e.changedTouches[0].screenX;
         if (touchEndX < touchStartX - 50 && currentIndex < totalCards - 1) {
@@ -277,3 +260,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initApp();
 });
+

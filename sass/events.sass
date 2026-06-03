@@ -1,0 +1,934 @@
+// ======================= MAIN LAYOUT & WRAPPER =======================
+.main-container
+    width: 100%
+    max-width: $app-width
+    flex: 1
+    min-height: 600px
+    display: flex
+    flex-direction: column
+    padding: 40px 20px 20px 20px
+    gap: 20px
+
+    .categories-wrapper
+        position: relative
+        width: fit-content
+        min-width: 150px
+        margin-bottom: 15px
+
+        .button-categories
+            width: 100%
+            height: 40px
+            background-color: $color-yellow
+            border-radius: 20px
+            display: flex
+            justify-content: center
+            align-items: center
+            color: $color-dark-blue
+            font-size: 0.95rem
+            font-weight: bold
+            cursor: pointer
+            transition: all 0.2s ease
+            padding: 0 25px
+            box-sizing: border-box
+
+            &:hover
+                transform: scale(1.05)
+                box-shadow: 0 0 15px rgba(255, 211, 25, 0.4)
+
+        .categories-toggle-checkbox
+            display: none
+            
+            &:checked ~ .categories-menu
+                display: flex
+            
+            &:checked ~ .categories-overlay-close
+                display: block
+
+        .categories-menu
+            position: absolute
+            top: 50px
+            left: 0
+            width: 100%
+            min-width: 150px
+            background-color: $color-deep-dark-blue
+            border: 1px solid $color-yellow
+            border-radius: 12px
+            display: none
+            flex-direction: column
+            overflow: hidden
+            z-index: 100
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5)
+
+            .category-option
+                padding: 10px 15px
+                color: #fff
+                font-size: 0.85rem
+                cursor: pointer
+                transition: background 0.2s ease
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+
+                &:last-child
+                    border-bottom: none
+
+                &:hover
+                    background: rgba(255, 211, 25, 0.2)
+                    color: $color-yellow
+
+                &.selected
+                    background: rgba(255, 211, 25, 0.3)
+                    color: $color-yellow
+                    font-weight: bold
+
+
+
+
+
+
+
+
+
+// ======================= ACTION BAR (DATE BAR) =======================
+.action-bar
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 15px
+    width: 100%
+    margin-bottom: 10px
+
+    .date-input-container
+        flex: 1
+        height: 40px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        background-color: #171630
+        border-radius: 20px
+        border: 2px solid #290d27
+        overflow: hidden
+
+        .arrow-btn-prev, .arrow-btn-next
+            background: none
+            border: none
+            color: $color-yellow
+            font-size: 24px
+            cursor: pointer
+            display: flex
+            align-items: center
+            justify-content: center
+            height: 100%
+            padding: 0 10px
+            transition: all 0.2s ease
+
+            &:hover
+                color: darken($color-yellow, 10%)
+                transform: scale(1.05)
+
+        .date-display
+            flex: 1
+            text-align: center
+            color: #fff
+            font-weight: bold
+            font-size: 0.9rem
+
+    .calendar-btn
+        width: 45px
+        height: 100%
+        border: none
+        background-color: $color-yellow
+        border-radius: 8px
+        font-size: 20px
+        color: $color-dark-blue
+        cursor: pointer
+        display: flex
+        justify-content: center
+        align-items: center
+        transition: transform 0.2s ease
+
+        &:hover
+            transform: scale(1.05)
+
+
+
+
+
+
+
+// ======================= SWIPER / CAROUSEL =======================
+.switcher
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 15px
+    padding: 10px 0
+
+    .switcher-left, .switcher-right
+        width: 35px
+        height: 35px
+        background-color: $color-yellow
+        border-radius: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        color: #000
+        cursor: pointer
+        transition: all 0.2s ease
+        z-index: 10
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2)
+        
+        &:hover
+            background-color: color.adjust($color-yellow, $lightness: -5%)
+            transform: scale(1.1)
+
+        &.disabled
+            opacity: 0.3
+            cursor: default
+            pointer-events: none
+
+    .cards-viewport
+        flex: 1
+        overflow: hidden
+        position: relative
+        height: 180px
+        border-radius: 12px
+
+    .cards-container
+        display: flex
+        height: 100%
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)
+
+    .main-card
+        min-width: 100%
+        height: 100%
+        background-color: $color-purple
+        display: flex
+        flex-direction: column
+        overflow: hidden
+        border-radius: 12px
+
+        .card-header
+            height: 35px
+            background-color: $color-yellow
+            display: flex
+            justify-content: center
+            align-items: center
+            color: $color-dark-blue
+            font-size: 1rem
+            font-weight: bold
+        
+        .card-body
+            flex: 1
+            overflow: hidden
+            img
+                max-width: 100%
+                height: auto
+                display: block
+
+        .card-footer
+            height: 35px
+            background-color: $color-yellow
+            display: flex
+            justify-content: space-between
+            align-items: center
+            padding: 0 10px
+            color: $color-dark-blue
+            font-size: 0.7rem
+            
+            .button-booking
+                width: 85px
+                height: 22px
+                background-color: $color-violet
+                border-radius: 11px
+                display: flex
+                justify-content: center
+                align-items: center
+                color: #ffffff
+                font-size: 0.65rem
+                cursor: pointer
+
+
+
+
+
+
+
+
+// ======================= MAP SECTION =======================
+.title-map
+    width: 120px
+    height: 30px
+    background-color: $color-yellow
+    border-radius: 14px
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $color-dark-blue
+    font-size: 0.85rem
+    text-transform: uppercase
+    letter-spacing: 1px
+    margin: 0 auto
+
+.map-container
+    border: 2px solid $color-element-grey
+    border-radius: 15px
+    overflow: hidden
+    margin-bottom: 30px
+    background-color: #fff
+    
+    .map-view
+        height: 250px 
+        position: relative
+        z-index: 1
+
+    .map-popup
+        display: none
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        width: 85%
+        max-width: 280px
+        border-radius: 15px
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6)
+        z-index: 1000
+        overflow: hidden
+        border: 1px solid rgba(255, 255, 255, 0.2) 
+        padding: 8px 
+
+        &.active
+            display: block
+
+        .popup-container
+            position: relative
+            display: flex
+            flex-direction: column
+
+            .close-popup
+                position: absolute
+                top: -5px
+                right: 5px
+                font-size: 20px
+                cursor: pointer
+                color: $color-pink
+                z-index: 10
+
+            .popup-header
+                height: 40px
+                background-color: $color-deep-dark-blue
+                display: flex
+                justify-content: space-between
+                align-items: center
+                padding: 0 10px
+                
+                h3
+                    color: #fff
+                    font-size: 0.85rem
+                    margin: 0
+                    font-weight: bold
+
+                .popup-date-badge
+                    background-color: $color-yellow
+                    color: $color-dark-blue
+                    padding: 2px 8px
+                    border-radius: 4px
+                    font-size: 0.7rem
+                    font-weight: bold
+
+            .popup-body
+                width: 100%
+                height: 120px
+                background-color: #fff
+                overflow: hidden
+                display: flex
+                align-items: center
+                justify-content: center
+                
+                img
+                    width: 100%
+                    height: 100%
+                    display: block
+                    object-fit: cover
+
+            .popup-footer
+                height: 50px
+                background-color: $color-purple
+                display: flex
+                justify-content: space-between
+                align-items: center
+                padding: 0 10px
+                
+                .popup-address
+                    color: #fff
+                    font-size: 0.65rem
+                    max-width: 60%
+                    line-height: 1.2
+
+                .popup-reserve-btn
+                    background-color: $color-yellow
+                    color: $color-dark-blue
+                    border: none
+                    padding: 5px 12px
+                    border-radius: 12px
+                    font-size: 0.65rem
+                    cursor: pointer
+                    font-weight: bold
+                    font-family: $font-family
+                    transition: transform 0.2s ease
+
+                    &:hover
+                        transform: scale(1.05)
+
+    .map-legend
+        padding: 12px
+        background-color: #666
+        display: flex
+        justify-content: space-between
+
+        .legend-col
+            display: flex
+            flex-direction: column
+            gap: 8px
+
+            .legend-item
+                display: flex
+                align-items: center
+                gap: 10px
+                color: #ffffff
+                font-size: 0.75rem
+                font-weight: normal
+
+                .color-box
+                    width: 14px
+                    height: 14px
+                    border-radius: 2px
+                    flex-shrink: 0
+                    &.green
+                        background-color: $color-green
+                    &.red
+                        background-color: $color-pink
+                    &.yellow
+                        background-color: $color-yellow
+                    &.blue
+                        background-color: $color-violet
+
+                .line
+                    width: 30px
+                    height: 4px
+                    background-color: rgba(255, 255, 255, 0.3)
+                    border-radius: 2px
+                    flex-shrink: 0
+
+
+
+
+
+
+
+
+
+// ======================= CALENDAR MODAL =======================
+.calendar-overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(18, 17, 40, 0.8)
+    backdrop-filter: blur(8px)
+    z-index: 2000
+    display: none
+    justify-content: center
+    align-items: center
+    opacity: 0
+    transition: opacity 0.3s ease
+
+    &.active
+        display: flex
+        opacity: 1
+
+    .calendar-container
+        width: 90%
+        max-width: 350px
+        background-color: $color-dark-blue
+        border: 2px solid $color-violet
+        border-radius: 20px
+        padding: 20px
+        box-shadow: 0 0 30px rgba(176, 0, 255, 0.4)
+
+        .calendar-header
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 20px
+            
+            h2
+                color: #fff
+                font-size: 1.2rem
+                text-transform: uppercase
+                letter-spacing: 1px
+
+            button
+                background: none
+                border: none
+                color: $color-yellow
+                font-size: 1.2rem
+                cursor: pointer
+                transition: transform 0.2s ease
+                &:hover
+                    transform: scale(1.2)
+
+        .calendar-weekdays
+            display: grid
+            grid-template-columns: repeat(7, 1fr)
+            text-align: center
+            color: $color-pink
+            font-weight: bold
+            font-size: 0.8rem
+            margin-bottom: 10px
+
+        .calendar-days
+            display: grid
+            grid-template-columns: repeat(7, 1fr)
+            gap: 5px
+
+            .day
+                aspect-ratio: 1
+                display: flex
+                justify-content: center
+                align-items: center
+                color: #fff
+                font-size: 0.9rem
+                cursor: pointer
+                border-radius: 5px
+                transition: all 0.2s ease
+                &:hover
+                    background-color: rgba(255, 255, 255, 0.1)
+                    color: $color-yellow
+
+                &.today
+                    border: 1px solid $color-yellow
+                    color: $color-yellow
+
+                &.selected
+                    background-color: $color-violet
+                    color: #fff
+                    box-shadow: 0 0 10px $color-violet
+
+                &.empty
+                    cursor: default
+                    &:hover
+                        background: none
+
+
+
+
+
+
+
+// ======================= EVENTS PAGE ONLY STYLES =======================
+.events-top-controls
+    display: flex
+    flex-direction: column
+    gap: 15px
+    width: 100%
+    align-items: center
+    margin-bottom: 25px
+
+    .categories-wrapper
+        width: 100%
+        display: flex
+        justify-content: center
+
+.all-events-divider
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 15px
+    margin: 40px auto 25px auto
+    width: 100%
+    max-width: 1200px
+    padding: 0 20px
+    box-sizing: border-box
+
+    .divider-line
+        flex: 1
+        height: 1px
+        background: linear-gradient(90deg, transparent, $color-pink, transparent)
+
+    h2
+        font-family: $font-family
+        color: #fff
+        font-size: 1.2rem
+        text-transform: uppercase
+        letter-spacing: 2px
+        text-shadow: 0 0 10px $color-pink
+        text-align: center
+
+.all-events-grid
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))
+    gap: 25px
+    width: 100%
+    max-width: 1200px
+    margin: 0 auto 40px auto
+    padding: 0 10px
+
+.event-grid-card
+    background-color: #171630
+    border-radius: 15px
+    overflow: hidden
+    position: relative
+    display: flex
+    flex-direction: column
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease
+    border: 2px solid transparent
+
+    &.sportif
+        box-shadow: 0 4px 15px rgba(23, 255, 98, 0.05)
+        border-color: rgba(23, 255, 98, 0.15)
+        &:hover
+            box-shadow: 0 8px 25px rgba(23, 255, 98, 0.35)
+            border-color: rgba(23, 255, 98, 0.6)
+
+    &.concert
+        box-shadow: 0 4px 15px rgba(255, 41, 117, 0.05)
+        border-color: rgba(255, 41, 117, 0.15)
+        &:hover
+            box-shadow: 0 8px 25px rgba(255, 41, 117, 0.35)
+            border-color: rgba(255, 41, 117, 0.6)
+
+    &.famille
+        box-shadow: 0 4px 15px rgba(255, 211, 25, 0.05)
+        border-color: rgba(255, 211, 25, 0.15)
+        &:hover
+            box-shadow: 0 8px 25px rgba(255, 211, 25, 0.35)
+            border-color: rgba(255, 211, 25, 0.6)
+
+    &.festival
+        box-shadow: 0 4px 15px rgba(176, 0, 255, 0.05)
+        border-color: rgba(176, 0, 255, 0.15)
+        &:hover
+            box-shadow: 0 8px 25px rgba(176, 0, 255, 0.35)
+            border-color: rgba(176, 0, 255, 0.6)
+
+    .grid-card-img-wrapper
+        height: 160px
+        width: 100%
+        overflow: hidden
+        position: relative
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+            transition: transform 0.5s ease
+
+        &:hover img
+            transform: scale(1.08)
+
+        .category-badge
+            position: absolute
+            top: 12px
+            right: 12px
+            padding: 4px 10px
+            border-radius: 20px
+            font-size: 0.65rem
+            font-weight: bold
+            text-transform: uppercase
+            color: #fff
+
+            &.sportif
+                background-color: $color-green
+                box-shadow: 0 0 10px $color-green
+
+            &.concert
+                background-color: $color-pink
+                box-shadow: 0 0 10px $color-pink
+
+            &.famille
+                background-color: $color-yellow
+                color: #121128
+                box-shadow: 0 0 10px $color-yellow
+
+            &.festival
+                background-color: $color-violet
+                box-shadow: 0 0 10px $color-violet
+
+    .grid-card-content
+        padding: 20px
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        gap: 15px
+
+        .grid-card-title
+            font-family: $font-family
+            font-size: 1.1rem
+            color: #fff
+            margin: 0
+            line-height: 1.3
+
+        .grid-card-meta
+            display: flex
+            flex-direction: column
+            gap: 8px
+
+            p
+                font-size: 0.75rem
+                color: #d4d4d4
+                display: flex
+                align-items: center
+                gap: 6px
+                margin: 0
+
+                i
+                    color: $color-pink
+                    width: 14px
+
+        .button-booking
+            width: 100%
+            padding: 10px 0
+            border-radius: 8px
+            border: none
+            outline: none
+            background-color: $color-violet
+            color: #fff
+            font-family: $font-family
+            font-size: 0.9rem
+            font-weight: bold
+            cursor: pointer
+            transition: background-color 0.2s ease, transform 0.2s
+            align-self: flex-end
+            margin-top: auto
+            text-align: center
+
+            &:hover
+                background-color: darken($color-violet, 10%)
+                transform: scale(1.02)
+
+.empty-grid-message
+    grid-column: 1 / -1
+    text-align: center
+    padding: 40px 20px
+    font-size: 0.9rem
+    color: #d4d4d4
+
+
+
+
+
+
+
+// ======================= RESPONSIVE DESKTOP =======================
+@media (min-width: 1024px)
+    .main-container
+        max-width: 1200px
+        flex-direction: column
+        align-items: center
+        gap: 40px
+        padding: 40px
+
+        &.events-page-container
+            flex-direction: column
+            align-items: stretch
+            gap: 20px
+
+            .switcher
+                max-width: 600px
+                width: 100%
+                margin: 0 auto
+        
+        .desktop-left
+            width: 100%
+            max-width: 800px
+            display: flex
+            flex-direction: column
+            gap: 20px
+
+            .switcher
+                .cards-viewport
+                    height: 380px
+
+        .desktop-right
+            width: 100%
+            max-width: 1100px
+            display: flex
+            flex-direction: column
+            height: 550px 
+            
+            .title-map
+                margin: 0 auto 15px auto
+                
+            .map-container
+                height: 100%
+                display: flex
+                flex-direction: column
+                
+                .map-view
+                    flex: 1 
+                    height: auto
+
+    .events-top-controls
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        max-width: 1200px
+        margin: 0 auto 30px auto
+
+        .categories-wrapper
+            width: auto
+            justify-content: flex-start
+
+    .all-events-grid
+        padding: 0
+
+
+
+
+
+
+
+// ======================= LIGHT THEME OVERRIDES =======================
+body:has(#theme-checkbox:checked)
+    .main-container
+        .categories-wrapper
+            .categories-menu
+                background-color: #ffffff
+                border-color: $color-violet
+                box-shadow: 0 8px 30px rgba(176, 0, 255, 0.1)
+
+                .category-option
+                    color: #121128
+                    border-bottom: 1px solid rgba(18, 17, 40, 0.1)
+
+                    &:hover
+                        background-color: rgba(176, 0, 255, 0.1)
+                        color: $color-violet
+
+                    &.selected
+                        background-color: $color-violet
+                        color: #ffffff
+
+        .main-card
+            background-color: #ffffff
+            border: 1px solid rgba(176, 0, 255, 0.15)
+            box-shadow: 0 8px 32px rgba(176, 0, 255, 0.06)
+
+            .card-body
+                background-color: #f8fafc
+
+        .title-map
+            background-color: $color-violet
+            color: #ffffff
+
+        .map-container
+            border-color: rgba(176, 0, 255, 0.2)
+            box-shadow: 0 8px 30px rgba(176, 0, 255, 0.05)
+
+            .map-legend
+                background-color: #ffffff
+                border-top: 1px solid rgba(176, 0, 255, 0.1)
+
+                .legend-item
+                    color: #121128
+
+                    .line
+                        background-color: rgba(18, 17, 40, 0.1)
+
+    .calendar-overlay
+        .calendar-container
+            background-color: #ffffff
+            border-color: $color-violet
+            box-shadow: 0 10px 40px rgba(176, 0, 255, 0.2)
+
+            .calendar-header
+                h2
+                    color: #121128
+
+            .calendar-days
+                .day
+                    color: #121128
+
+                    &:hover
+                        background-color: rgba(176, 0, 255, 0.1)
+                        color: $color-violet
+
+                    &.today
+                        border-color: $color-violet
+                        color: $color-violet
+
+                    &.selected
+                        background-color: $color-violet
+                        color: #ffffff
+                        box-shadow: 0 0 10px rgba(176, 0, 255, 0.4)
+
+    .all-events-divider
+        h2
+            color: #121128
+            text-shadow: none
+        .divider-line
+            background: linear-gradient(90deg, transparent, $color-pink, transparent)
+
+    .event-grid-card
+        background-color: #ffffff
+        border: 1px solid rgba(176, 0, 255, 0.15)
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05)
+
+        &.sportif
+            background-color: #F0FDF4
+            border-color: rgba(23, 255, 98, 0.3)
+            &:hover
+                box-shadow: 0 8px 25px rgba(23, 255, 98, 0.2)
+                border-color: $color-green
+
+        &.concert
+            background-color: #FFF1F2
+            border-color: rgba(255, 41, 117, 0.3)
+            &:hover
+                box-shadow: 0 8px 25px rgba(255, 41, 117, 0.2)
+                border-color: $color-pink
+
+        &.famille
+            background-color: #FEFCE8
+            border-color: rgba(255, 211, 25, 0.3)
+            &:hover
+                box-shadow: 0 8px 25px rgba(255, 211, 25, 0.2)
+                border-color: $color-yellow
+
+        &.festival
+            background-color: #FAF5FF
+            border-color: rgba(176, 0, 255, 0.3)
+            &:hover
+                box-shadow: 0 8px 25px rgba(176, 0, 255, 0.2)
+                border-color: $color-violet
+
+        .grid-card-content
+            .grid-card-title
+                color: #121128
+            .grid-card-meta
+                p
+                    color: #4a5568
+                    i
+                        color: $color-pink
+
+        .grid-card-img-wrapper
+            .category-badge
+                &.sportif
+                    background-color: $color-green
+                    color: #121128
+                    box-shadow: none
+                &.concert
+                    background-color: $color-pink
+                    color: #fff
+                    box-shadow: none
+                &.famille
+                    background-color: $color-yellow
+                    color: #121128
+                    box-shadow: none
+                &.festival
+                    background-color: $color-violet
+                    color: #fff
+                    box-shadow: none
+
+    .empty-grid-message
+        color: #121128
