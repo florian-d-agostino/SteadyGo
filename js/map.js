@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- MAP CREATION ---
+    // --- INITIALIZE MAP VIEW ---
     var myMap = L.map('map').setView([43.2965, 5.3698], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- EVENT DATA ---
+
+    // --- CONFIG & STATE ---
     const OPENAGENDA_API_KEY = "512a334322fe409fbbfb9da05c29440a";
     const OPENAGENDA_UID = "21769447";
 
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectedFilterCategory = "Tous";
     var rawApiEvents = [];
 
+    // Offline fallback event points
     const MOCK_EVENTS = [
         {
             name: "Festival des Arts",
@@ -68,10 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- MARKER MANAGEMENT ---
+
+    // --- MAP MARKERS RENDERING ---
     
     var markerGroup = L.layerGroup().addTo(myMap);
 
+    // Render active marker points on the map
     function displayPoints(chosenCategory) {
         
         markerGroup.clearLayers();
@@ -89,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 var marker = L.marker(event.gps, { icon: colorIcon });
 
+                // Open custom info popup on marker click
                 marker.on('click', function(e) {
                     document.getElementById('popup-title').innerText = this.options.eventTitle;
                     document.getElementById('popup-date').innerText = this.options.eventDate;
@@ -115,15 +120,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- CATEGORY MENU MANAGEMENT ---
+
+    // --- CATEGORY SELECTOR CONTROLS ---
     var menuBtn = document.getElementById('categories-btn');
     var menuList = document.getElementById('categories-menu');
     var menuOptions = document.getElementsByClassName('category-option');
 
+    // Toggle categories list menu
     menuBtn.addEventListener('click', function() {
         menuList.classList.toggle('active');
     });
 
+    // Add click filters to category items
     for (var j = 0; j < menuOptions.length; j++) {
         menuOptions[j].addEventListener('click', function() {
             var categoryName = this.getAttribute('data-category');
@@ -140,7 +148,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- CLOSING THE POPUP ---
+
+
+    // --- EVENT POPUP DISMISSAL ---
     var closePopupBtn = document.querySelector('.close-popup');
     
     closePopupBtn.addEventListener('click', function() {
@@ -151,6 +161,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('custom-popup').classList.remove('active');
     });
 
+
+
+
+
+
+    // --- UTILITY FUNCTIONS ---
+
+    // Parse mock date strings for comparison
     function parseMockDate(dateStr) {
         if (!dateStr) return "";
         var parts = dateStr.trim().split(" ");
@@ -167,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return year + "-" + month + "-" + day;
     }
 
+    // Filter markers list and refresh display
     function filterAndDisplayPoints() {
         var targetDate = new Date(selectedFilterDate);
         targetDate.setHours(0, 0, 0, 0);
@@ -208,7 +227,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- ON START WITH DYNAMIC LOADING ---
+
+
+    // --- LOAD DYNAMIC EVENTS DATA ---
     async function initMapEvents() {
         if (!OPENAGENDA_API_KEY || !OPENAGENDA_UID) {
             rawApiEvents = MOCK_EVENTS.map(function(ev) {
@@ -227,9 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-
-
-        // Fetch MAPS Events data 
         const url = `https://api.openagenda.com/v2/agendas/${OPENAGENDA_UID}/events?key=${OPENAGENDA_API_KEY}&monolingual=fr&detailed=1&relative%5B0%5D=current&relative%5B1%5D=upcoming&size=100`;
         try {
             const response = await fetch(url);
@@ -266,16 +284,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         color = "#FFD319";
                     }
 
-
-
-
                     let img = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400";
                     if (cat === "Concert") img = "https://images.unsplash.com/photo-1511192303578-4a7b974a4286?w=400";
                     if (cat === "Sportif") img = "https://images.unsplash.com/photo-1530549387631-afb168514626?w=400";
                     if (cat === "Famille") img = "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=400";
-
-
-
 
                     let realImg = img;
                     if (event.image) {
@@ -307,7 +319,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
 
-        // If error 
         } catch (error) {
             console.warn("Could not load OpenAgenda events for map. Using offline mock.", error);
             rawApiEvents = MOCK_EVENTS.map(function(ev) {
@@ -326,10 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         filterAndDisplayPoints();
     }
 
-
-
-
-    // --- DATE FORMATTING FR --  
+    // Format ISO string date format to French text
     function formatDate(isoString) {
         const d = new Date(isoString);
         const day = d.getDate();
@@ -338,8 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day} ${monthName}`;
     }
 
-
-    // --- EVENT LISTENER --  
+    // Listen to custom date changed event
     document.addEventListener("novaVillaDateChanged", function(e) {
         selectedFilterDate = e.detail;
         filterAndDisplayPoints();

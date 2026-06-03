@@ -1,42 +1,30 @@
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
+    // Select elements for newsletter forms
     const subscribeForm = document.getElementById("subscribe-form");
     const unsubscribeForm = document.getElementById("unsubscribe-form");
     const unsubscribeCheckbox = document.getElementById("unsubscribe-checkbox");
 
 
-
-
-
-    // Get subscribers
+    // Retrieve subscriber list from localStorage
     function getStoredSubscribers() {
         const stored = localStorage.getItem("novavilla_newsletter_subscribers");
         return stored ? JSON.parse(stored) : [];
     }
 
 
-
-
-
-    // Save suscrbiers
+    // Save updated subscriber list to localStorage
     function saveSubscribers(list) {
         localStorage.setItem("novavilla_newsletter_subscribers", JSON.stringify(list));
     }
 
 
-
-    // Registration form
+    // Handle newsletter subscription
     if (subscribeForm) {
         subscribeForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const emailInput = document.getElementById("subscribe-email");
             const email = emailInput.value.trim();
 
-
-            // Add subscribers
             if (email) {
                 const subscribers = getStoredSubscribers();
                 if (subscribers.includes(email)) {
@@ -52,24 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-
-
-
-
-    // Unsubscribe form
+    // Handle newsletter unsubscription
     if (unsubscribeForm) {
         unsubscribeForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const emailInput = document.getElementById("unsubscribe-email");
             const email = emailInput.value.trim();
 
-
-
-
-
-
-            // Remove subscribers
             if (email) {
                 const subscribers = getStoredSubscribers();
                 if (!subscribers.includes(email)) {
@@ -87,4 +64,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-

@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
-
-
-
-
-    // --- 1. HTML ELEMENT RETRIEVAL ---
+    // --- DOM ELEMENTS ---
     const calendarBtn = document.querySelector('.calendar-btn');
     const calendarModal = document.getElementById('calendar-modal');
     const daysGrid = document.getElementById('calendar-days');
@@ -21,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- 2. DATE MANAGEMENT ---
+    // --- STATE VARIABLES ---
     const monthNames = [
         "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
         "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
@@ -42,8 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- 3. DISPLAY FUNCTIONS ---
+    // --- UI RENDERING ---
 
+    // Update text display in date navigation bar
     function refreshDateBarText() {
         let day = selectedDate.getDate();
         let month = monthNames[selectedDate.getMonth()].toLowerCase();
@@ -52,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dateTextZone.innerText = day + " " + month + " " + year;
     }
 
+    // Render calendar grid days
     function renderCalendar() {
         daysGrid.innerHTML = '';
         
@@ -70,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 
+        // Render empty cell offsets
         for (let i = 0; i < offset; i++) {
             let emptyCell = document.createElement('div');
             emptyCell.classList.add('day');
@@ -79,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let today = new Date();
 
+        // Render month days
         for (let i = 1; i <= lastDayOfMonth; i++) {
             let dayCell = document.createElement('div');
             dayCell.classList.add('day');
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dayCell.classList.add('selected');
             }
 
+            // Click day selection handler
             dayCell.addEventListener('click', function() {
                 selectedDate = new Date(year, month, i);
                 
@@ -112,8 +113,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- 4. MODAL MANAGEMENT ---
+    // --- MODAL MANAGEMENT ---
 
+    // Open calendar picker modal
     function openCalendar() {
         calendarModal.style.display = 'flex';
         setTimeout(function() {
@@ -122,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCalendar();
     }
 
+    // Close calendar picker modal
     function closeCalendar() {
         calendarModal.classList.remove('active');
         setTimeout(function() {
@@ -135,8 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- 5. EVENT LISTENERS ---
+    // --- EVENT LISTENERS ---
 
+    // Open/close click bindings
     calendarBtn.addEventListener('click', openCalendar);
     
     calendarModal.addEventListener('click', function(event) {
@@ -145,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Month nav button bindings
     prevMonthBtn.addEventListener('click', function() {
         displayMonthDate.setMonth(displayMonthDate.getMonth() - 1);
         renderCalendar();
@@ -155,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCalendar();
     });
 
+    // Date nav day-subtraction binding
     prevDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() - 1);
         localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
@@ -164,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
     });
 
+    // Date nav day-addition binding
     nextDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() + 1);
         localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
@@ -178,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- 6. INITIALIZATION ON START ---
+    // --- BOOTSTRAP INITIALIZATION ---
     refreshDateBarText();
     setTimeout(() => {
         document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));

@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
+    // --- DOM SELECTORS ---
     const carouselContainer = document.getElementById("events-container");
     const gridContainer = document.getElementById("events-grid");
     const prevBtn = document.getElementById("prev-event");
@@ -7,16 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoriesMenu = document.getElementById("categories-menu");
     const categoryOptions = document.querySelectorAll(".category-option");
 
+    // Carousel state
     let currentIndex = 0;
     let originalEventsList = [];
     let activeCategory = "Tous";
 
+    // API credentials
     const OPENAGENDA_API_KEY = "512a334322fe409fbbfb9da05c29440a";
     const OPENAGENDA_UID = "21769447";
 
 
 
-    // --- MOCKEVENTS IA ---
+
+
+    // --- FALLBACK OFFLINE EVENTS ---
     const MOCK_EVENTS = [
         {
             title: "Festival des Arts",
@@ -87,6 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let savedDateStr = localStorage.getItem('novaVillaSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
+
+
+
+
+    // --- PAGE INITIALIZATION ---
     async function initPage() {
         if (categoriesBtn) {
             categoriesBtn.addEventListener("click", () => {
@@ -94,12 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // Close dropdown when clicking outside
         document.addEventListener("click", (e) => {
             if (categoriesBtn && categoriesMenu && !categoriesBtn.contains(e.target) && !categoriesMenu.contains(e.target)) {
                 categoriesMenu.classList.remove("active");
             }
         });
 
+        // Category filter click handler
         categoryOptions.forEach(option => {
             option.addEventListener("click", () => {
                 activeCategory = option.getAttribute("data-category");
@@ -112,6 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
         await loadEventsData();
     }
 
+
+
+
+
+    // --- LOAD EVENT DATA ---
     async function loadEventsData() {
         if (!OPENAGENDA_API_KEY || !OPENAGENDA_UID) {
             useMockData();
@@ -137,11 +156,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Load mock offline data
     function useMockData() {
         originalEventsList = MOCK_EVENTS;
         filterAndRender();
     }
 
+
+
+
+
+
+    // --- FORMATTING UTILITIES ---
+
+    // Format ISO string date format to French text
     function formatDate(isoString) {
         const d = new Date(isoString);
         const day = d.getDate();
@@ -149,6 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
 
+    // Convert mock date string format to standardized ISO string format
     function parseMockDate(dateStr) {
         if (!dateStr) return "";
         const parts = dateStr.split(" ");
@@ -165,6 +194,14 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${year}-${month}-${day}`;
     }
 
+
+
+
+
+
+    // --- FILTER AND RENDER ENGINE ---
+
+    // Filter events by selected category and selected date
     function filterAndRender() {
         const targetDate = new Date(selectedDate);
         targetDate.setHours(0, 0, 0, 0);
@@ -196,6 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         });
 
+        // Map data structure
         const mappedEvents = dateFilteredEvents.map(event => {
             let cat = "Festival";
             const titleText = (event.title?.fr || event.title || "").toLowerCase();
@@ -237,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
 
+        // Filter events list by category
         const eventsToShow = activeCategory === "Tous" 
             ? mappedEvents 
             : mappedEvents.filter(e => e.category === activeCategory);
@@ -245,11 +284,20 @@ document.addEventListener("DOMContentLoaded", () => {
         renderGrid(eventsToShow);
     }
 
+    // Listen to custom date changed event
     document.addEventListener("novaVillaDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndRender();
     });
 
+
+
+
+
+
+    // --- CAROUSEL SLIDER RENDERING ---
+
+    // Render list of event cards inside the carousel container
     function renderCarousel(events) {
         carouselContainer.innerHTML = "";
         currentIndex = 0;
@@ -287,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
         initSwitcherControls(events.length);
     }
 
+    // Toggle switcher arrow visibility
     function initSwitcherControls(length) {
         if (length <= 1) {
             if (prevBtn) prevBtn.style.display = "none";
@@ -298,6 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSwitcher(length);
     }
 
+    // Translate carousel slide using CSS transform translateX
     function updateSwitcher(length) {
         const offset = currentIndex * -100;
         carouselContainer.style.transform = `translateX(${offset}%)`;
@@ -308,6 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Carousel navigation event triggers
     if (prevBtn) {
         prevBtn.addEventListener("click", () => {
             const length = carouselContainer.querySelectorAll(".main-card").length;
@@ -328,6 +379,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+
+
+
+
+
+    // --- EVENTS GRID RENDERING ---
+
+    // Render list of event cards inside the static grid container
     function renderGrid(events) {
         gridContainer.innerHTML = "";
 
@@ -362,5 +421,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Bootstrap init page
     initPage();
 });
