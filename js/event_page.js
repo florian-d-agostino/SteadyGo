@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 
+
+
+
     // --- DOM SELECTORS ---
     const carouselContainer = document.getElementById("events-container");
     const gridContainer = document.getElementById("events-grid");
@@ -9,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoriesBtn = document.getElementById("categories-btn");
     const categoriesMenu = document.getElementById("categories-menu");
     const categoryOptions = document.querySelectorAll(".category-option");
+
+
+
 
     // Carousel state
     let currentIndex = 0;
@@ -23,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- FALLBACK OFFLINE EVENTS ---
+    // Offline mock events
     const MOCK_EVENTS = [
         {
             title: "Festival des Arts",
@@ -98,7 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- PAGE INITIALIZATION ---
+
+    // ---------------- PAGE INITIALIZATION ---------------- 
+
+
+
+
     async function initPage() {
         if (categoriesBtn) {
             categoriesBtn.addEventListener("click", () => {
@@ -106,12 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Close dropdown when clicking outside
+        // Close category click outside
         document.addEventListener("click", (e) => {
             if (categoriesBtn && categoriesMenu && !categoriesBtn.contains(e.target) && !categoriesMenu.contains(e.target)) {
                 categoriesMenu.classList.remove("active");
             }
         });
+
+
 
         // Category filter click handler
         categoryOptions.forEach(option => {
@@ -130,13 +143,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- LOAD EVENT DATA ---
+    // --------------------- LOAD EVENT DATA --------------------- 
+
+
+
+
     async function loadEventsData() {
         if (!OPENAGENDA_API_KEY || !OPENAGENDA_UID) {
             useMockData();
             return;
         }
 
+
+        // OpenAgenda API
         const url = `https://api.openagenda.com/v2/agendas/${OPENAGENDA_UID}/events?key=${OPENAGENDA_API_KEY}&monolingual=fr&detailed=1&relative%5B0%5D=current&relative%5B1%5D=upcoming&size=100`;
         try {
             const response = await fetch(url);
@@ -156,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
     // Load mock offline data
     function useMockData() {
         originalEventsList = MOCK_EVENTS;
@@ -167,9 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- FORMATTING UTILITIES ---
+    // ---------------------- FORMATTING UTILITIES ---------------------- 
 
-    // Format ISO string date format to French text
+
+
+
+    // Format french date
     function formatDate(isoString) {
         const d = new Date(isoString);
         const day = d.getDate();
@@ -177,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
 
-    // Convert mock date string format to standardized ISO string format
+    // Parse mock date
     function parseMockDate(dateStr) {
         if (!dateStr) return "";
         const parts = dateStr.split(" ");
@@ -199,9 +222,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- FILTER AND RENDER ENGINE ---
+    // ------------------- FILTER AND RENDER ENGINE ------------------- 
 
-    // Filter events by selected category and selected date
+
+
+
+    // Filter events
     function filterAndRender() {
         const targetDate = new Date(selectedDate);
         targetDate.setHours(0, 0, 0, 0);
@@ -233,6 +259,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return true;
         });
 
+
+
+
+
         // Map data structure
         const mappedEvents = dateFilteredEvents.map(event => {
             let cat = "Festival";
@@ -245,6 +275,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 cat = "Famille";
             }
 
+
+
+            // Category image
             let img = "../assets/img/festival.jpg";
             if (cat === "Concert") img = "../assets/img/concert.jpg";
             if (cat === "Sportif") img = "../assets/img/sportif - tennis.jpg";
@@ -275,7 +308,11 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         });
 
-        // Filter events list by category
+
+
+
+
+        // Filter events by category
         const eventsToShow = activeCategory === "Tous" 
             ? mappedEvents 
             : mappedEvents.filter(e => e.category === activeCategory);
@@ -284,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderGrid(eventsToShow);
     }
 
-    // Listen to custom date changed event
+    // Custom date changed event
     document.addEventListener("novaVillaDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndRender();
@@ -295,9 +332,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- CAROUSEL SLIDER RENDERING ---
+    // --------------------- CAROUSEL RENDERING --------------------- 
 
-    // Render list of event cards inside the carousel container
+
+
+
+    // Carousel events renderer
     function renderCarousel(events) {
         carouselContainer.innerHTML = "";
         currentIndex = 0;
@@ -335,6 +375,9 @@ document.addEventListener("DOMContentLoaded", () => {
         initSwitcherControls(events.length);
     }
 
+
+
+
     // Toggle switcher arrow visibility
     function initSwitcherControls(length) {
         if (length <= 1) {
@@ -347,7 +390,10 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSwitcher(length);
     }
 
-    // Translate carousel slide using CSS transform translateX
+
+
+
+    // Update carousel slider position
     function updateSwitcher(length) {
         const offset = currentIndex * -100;
         carouselContainer.style.transform = `translateX(${offset}%)`;
@@ -358,7 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Carousel navigation event triggers
+    // Carousel navigation
     if (prevBtn) {
         prevBtn.addEventListener("click", () => {
             const length = carouselContainer.querySelectorAll(".main-card").length;
@@ -384,9 +430,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --- EVENTS GRID RENDERING ---
+    // --------------------- EVENT GRID RENDERING --------------------- 
 
-    // Render list of event cards inside the static grid container
+
+
+
+    // Render grid
     function renderGrid(events) {
         gridContainer.innerHTML = "";
 
@@ -421,6 +470,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Bootstrap init page
+
+
+
+    // Page initialization
     initPage();
 });

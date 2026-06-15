@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
 
+
+
+
     // --- DOM ELEMENTS ---
     const calendarBtn = document.querySelector('.calendar-btn');
     const calendarModal = document.getElementById('calendar-modal');
@@ -38,9 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- UI RENDERING ---
 
-    // Update text display in date navigation bar
+
+
+    // --------------------- UI RENDERING --------------------- 
+
+
+
+
+
+
+    // Update text nav bar
     function refreshDateBarText() {
         let day = selectedDate.getDate();
         let month = monthNames[selectedDate.getMonth()].toLowerCase();
@@ -49,7 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
         dateTextZone.innerText = day + " " + month + " " + year;
     }
 
-    // Render calendar grid days
+
+
+
+    // Render calendar
     function renderCalendar() {
         daysGrid.innerHTML = '';
         
@@ -68,6 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 
+
+
+
         // Render empty cell offsets
         for (let i = 0; i < offset; i++) {
             let emptyCell = document.createElement('div');
@@ -77,6 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let today = new Date();
+
+
+
 
         // Render month days
         for (let i = 1; i <= lastDayOfMonth; i++) {
@@ -91,6 +111,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (i === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
                 dayCell.classList.add('selected');
             }
+
+
+
 
             // Click day selection handler
             dayCell.addEventListener('click', function() {
@@ -113,9 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- MODAL MANAGEMENT ---
+    // -------------------------------- MODAL MANAGEMENT -------------------------------- 
 
-    // Open calendar picker modal
+
+
+
+
+
+    // Open calendar
     function openCalendar() {
         calendarModal.style.display = 'flex';
         setTimeout(function() {
@@ -123,6 +151,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10);
         renderCalendar();
     }
+
+
+
 
     // Close calendar picker modal
     function closeCalendar() {
@@ -138,9 +169,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- EVENT LISTENERS ---
+    // ---------------------- EVENT LISTENERS ---------------------- 
 
-    // Open/close click bindings
+
+
+
+    // Open/close calendar
     calendarBtn.addEventListener('click', openCalendar);
     
     calendarModal.addEventListener('click', function(event) {
@@ -149,7 +183,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Month nav button bindings
+
+
+
+    // Open previous month in calendar
     prevMonthBtn.addEventListener('click', function() {
         displayMonthDate.setMonth(displayMonthDate.getMonth() - 1);
         renderCalendar();
@@ -160,7 +197,10 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCalendar();
     });
 
-    // Date nav day-subtraction binding
+
+
+
+    // Open previous day in calendar
     prevDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() - 1);
         localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
@@ -170,7 +210,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
     });
 
-    // Date nav day-addition binding
+
+
+
+    // Open next day in calendar
     nextDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() + 1);
         localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
@@ -185,7 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // --- BOOTSTRAP INITIALIZATION ---
+    // -------------------------------- INITIALIZATION -------------------------------- 
+
+
+
+
     refreshDateBarText();
     setTimeout(() => {
         document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));

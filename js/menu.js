@@ -1,9 +1,16 @@
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Theme toggle checkbox element
+
+
+
+
+    // ------------------ THEME TOGGLE ------------------ 
+
     const themeCheckbox = document.getElementById("theme-checkbox");
 
     if (themeCheckbox) {
-        // Load saved theme preference
         const savedTheme = localStorage.getItem("novaVillaTheme");
         if (savedTheme === "light") {
             themeCheckbox.checked = true;
@@ -11,7 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
             themeCheckbox.checked = false;
         }
 
-        // Save theme changes on toggle
+
+
+        // Switch theme
         themeCheckbox.addEventListener("change", () => {
             const isLight = themeCheckbox.checked;
             localStorage.setItem("novaVillaTheme", isLight ? "light" : "dark");

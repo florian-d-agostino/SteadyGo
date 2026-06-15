@@ -1,24 +1,34 @@
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Select elements for newsletter forms
+
+
+
+
+    // ------------------ NEWSLETTER HANDLER ------------------ 
+
     const subscribeForm = document.getElementById("subscribe-form");
     const unsubscribeForm = document.getElementById("unsubscribe-form");
     const unsubscribeCheckbox = document.getElementById("unsubscribe-checkbox");
 
 
-    // Retrieve subscriber list from localStorage
+    // Local storage email
     function getStoredSubscribers() {
         const stored = localStorage.getItem("novavilla_newsletter_subscribers");
         return stored ? JSON.parse(stored) : [];
     }
 
 
-    // Save updated subscriber list to localStorage
+    // Local storage email update
     function saveSubscribers(list) {
         localStorage.setItem("novavilla_newsletter_subscribers", JSON.stringify(list));
     }
 
 
-    // Handle newsletter subscription
+    // Subscribe newsletter
     if (subscribeForm) {
         subscribeForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -40,7 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // Handle newsletter unsubscription
+
+
+
+    // Unsubscribe newsletter
     if (unsubscribeForm) {
         unsubscribeForm.addEventListener("submit", (e) => {
             e.preventDefault();

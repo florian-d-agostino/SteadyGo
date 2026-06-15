@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let totalCards = 0;
 
-    // API credentials for OpenAgenda
+    // API Key
     const OPENAGENDA_API_KEY = "512a334322fe409fbbfb9da05c29440a";
     const OPENAGENDA_UID = "21769447";  
 
-    // Mock events used when API is unavailable
+    // Mock events
     const MOCK_EVENTS = [
         {
             title: "Festival des Arts",

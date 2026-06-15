@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 
+
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +14,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
+
+
+
+
+
 <body>
     <div class="background-stripes"></div>
 
-    <!-- BACKGROUND STARS -->
+
+
+
+
+
+
+
+    <!-- Background withe stars -->
     <div class="stars"></div>
 
-    <!-- HEADER -->
+
+
+
+
+    <!-- Header -->
     <header class="top-header">
         <div class="logo-container">
             <img src="../assets/img/logo2%20dark.svg" alt="Logo NovaVilla" class="logo-dark">
@@ -49,17 +69,30 @@
         </label>
     </header>
 
-    <!-- MAIN CONTENT -->
+
+
+
+
+
+    <!-- Main -->
     <main class="main-container news-page-container">
-        
-        <!-- INTRO CONTENT -->
+
+
+
+
+
+        <!-- Intro -->
         <div class="all-events-divider">
             <span class="divider-line"></span>
             <h2>Actualités de la Villa</h2>
             <span class="divider-line"></span>
         </div>
 
-        <!-- CATEGORIES TO CHECKBOX PILLS SYSTEM -->
+
+
+
+
+        <!-- Categories -->
         <section class="news-categories-section">
             <h3 class="news-section-title">Filtrer par thématique :</h3>
             <div class="news-categories">
@@ -86,13 +119,22 @@
             </div>
         </section>
 
-        <!-- NEWS LISTING CONTAINER -->
+
+
+
+
+
+
+        <!-- News list-->
         <section class="news-grid" id="news-container">
-            <!-- Message d'avertissement si aucun filtre n'est coché -->
             <div class="empty-news-message">
                 <p><i class="fa-solid fa-circle-exclamation fa-2x"></i></p>
                 <p style="margin-top:10px;">Veuillez cocher au moins une catégorie pour afficher les actualités.</p>
             </div>
+
+
+
+
 
             <!-- Card 1 -->
             <article class="news-card concert fade-in">
@@ -112,6 +154,12 @@
                 </div>
             </article>
 
+
+
+
+
+
+
             <!-- Card 2 -->
             <article class="news-card sportif fade-in">
                 <div class="news-card-img-wrapper">
@@ -129,6 +177,12 @@
                     </button>
                 </div>
             </article>
+
+
+
+
+
+
 
             <!-- Card 3 -->
             <article class="news-card festival fade-in">
@@ -148,6 +202,15 @@
                 </div>
             </article>
 
+
+
+
+
+
+
+
+
+
             <!-- Card 4 -->
             <article class="news-card famille fade-in">
                 <div class="news-card-img-wrapper">
@@ -166,6 +229,12 @@
                 </div>
             </article>
 
+
+
+
+
+
+
             <!-- Card 5 -->
             <article class="news-card festival fade-in">
                 <div class="news-card-img-wrapper">
@@ -183,6 +252,14 @@
                     </button>
                 </div>
             </article>
+
+
+
+
+
+
+
+
 
             <!-- Card 6 -->
             <article class="news-card sportif fade-in">
@@ -203,7 +280,13 @@
             </article>
         </section>
 
-        <!-- NEWSLETTER SUBSCRIPTION BOX -->
+
+
+
+
+
+
+        <!-- Newsletter -->
         <section class="newsletter-section">
             <h3 class="newsletter-title">Newsletter NovaVilla</h3>
             <p class="newsletter-desc">Abonnez-vous à notre lettre d'actualités pour recevoir toutes les programmations, alertes de réservation et annonces exclusives en avant-première.</p>
@@ -214,9 +297,17 @@
             <label for="unsubscribe-checkbox" id="unsubscribe-trigger" class="unsubscribe-trigger-btn" role="button" style="display:inline-block; text-align:center;">Se désabonner de la newsletter</label>
         </section>
 
+
+
+
+
     </main>
 
-    <!-- FOOTER / BOTTOM NAV -->
+
+
+
+
+    <!-- Footer -->
     <footer class="bottom-nav">
         <div class="footer-curved"></div>
 
@@ -240,7 +331,13 @@
         </div>
     </footer>
 
-    <!-- Burger Menu Overlay -->
+
+
+
+
+
+
+    <!-- Burger Menu -->
     <div id="burger-menu" class="burger-overlay">
         <div class="menu-content">
             <label for="burger-checkbox" class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</label>
@@ -253,8 +350,16 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+    <!-- Unsubscribe -->
     <input type="checkbox" id="unsubscribe-checkbox" class="modal-checkbox" style="display:none;">
-    <!-- Unsubscribe Modal Popup -->
     <div id="unsubscribe-modal" class="calendar-overlay">
         <div class="calendar-container" style="max-width: 400px; padding: 30px; position: relative;">
             <label for="unsubscribe-checkbox" class="close-modal-btn" id="close-unsubscribe" role="button" tabindex="0" aria-label="Fermer la fenêtre de désinscription" style="position: absolute; top: 12px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #FF2975; transition: transform 0.2s; display: block; line-height: 1;">&times;</label>
@@ -266,6 +371,10 @@
             </form>
         </div>
     </div>
+
+
+
+
 
     <script src="../js/menu.js"></script>
     <script src="../js/news_page.js"></script>
