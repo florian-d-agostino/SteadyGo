@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Local storage email
     function getStoredSubscribers() {
-        const stored = localStorage.getItem("novavilla_newsletter_subscribers");
+        const stored = localStorage.getItem("villanova_newsletter_subscribers");
         return stored ? JSON.parse(stored) : [];
     }
 
 
     // Local storage email update
     function saveSubscribers(list) {
-        localStorage.setItem("novavilla_newsletter_subscribers", JSON.stringify(list));
+        localStorage.setItem("villanova_newsletter_subscribers", JSON.stringify(list));
     }
 
 
@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (email) {
                 const subscribers = getStoredSubscribers();
                 if (subscribers.includes(email)) {
-                    alert("Cette adresse e-mail est déjà inscrite à la newsletter NovaVilla !");
+                    alert("Cette adresse e-mail est déjà inscrite à la newsletter VillaNova !");
                     return;
                 }
                 subscribers.push(email);
                 saveSubscribers(subscribers);
-                alert("Inscription réussie ! Vous recevrez désormais les actualités NovaVilla par e-mail.");
+                alert("Inscription réussie ! Vous recevrez désormais les actualités VillaNova par e-mail.");
                 emailInput.value = "";
             }
         });

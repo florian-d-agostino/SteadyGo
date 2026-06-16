@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             bookingUrl: "https://openagenda.com"
         },
         {
-            title: "Tournoi de Tennis NovaVilla",
+            title: "Tournoi de Tennis VillaNova",
             category: "Sportif",
             date: "12 Mai 2026",
             address: "Corniche Kennedy, Marseille",
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    let savedDateStr = localStorage.getItem('novaVillaSelectedDate');
+    let savedDateStr = localStorage.getItem('villaNovaSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
 
@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dateStr = event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement");
 
             return {
-                title: event.title?.fr || event.title || "Événement NovaVilla",
+                title: event.title?.fr || event.title || "Événement VillaNova",
                 category: event.category || cat,
                 date: event.date || dateStr,
                 address: event.location?.name || event.location?.address || event.address || "Marseille",
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Custom date changed event
-    document.addEventListener("novaVillaDateChanged", (e) => {
+    document.addEventListener("villaNovaDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndRender();
     });

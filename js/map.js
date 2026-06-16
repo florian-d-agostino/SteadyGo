@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const OPENAGENDA_UID = "21769447";
 
     var eventList = [];
-    var savedDateStr = localStorage.getItem('novaVillaSelectedDate');
+    var savedDateStr = localStorage.getItem('villaNovaSelectedDate');
     var selectedFilterDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
     var selectedFilterCategory = "Tous";
     var rawApiEvents = [];
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     let lng = event.location?.longitude || 5.3698;
 
                     return {
-                        name: event.title?.fr || event.title || "Événement NovaVilla",
+                        name: event.title?.fr || event.title || "Événement VillaNova",
                         date: event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement"),
                         location: event.location?.name || event.location?.address || "Marseille",
                         image: realImg,
@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Listen to date changed event
-    document.addEventListener("novaVillaDateChanged", function(e) {
+    document.addEventListener("villaNovaDateChanged", function(e) {
         selectedFilterDate = e.detail;
         filterAndDisplayPoints();
     });

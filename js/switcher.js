@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event list state and date state
     let originalEventsList = [];
-    let savedDateStr = localStorage.getItem('novaVillaSelectedDate');
+    let savedDateStr = localStorage.getItem('villaNovaSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
     // Initialize switcher application
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Listen to custom date changed event
-    document.addEventListener("novaVillaDateChanged", (e) => {
+    document.addEventListener("villaNovaDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndDisplayEvents();
     });

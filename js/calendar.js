@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
     ];
 
-    let savedDate = localStorage.getItem('novaVillaSelectedDate');
+    let savedDate = localStorage.getItem('villaNovaSelectedDate');
     
     let selectedDate;
     if (savedDate) {
@@ -119,11 +119,11 @@ document.addEventListener('DOMContentLoaded', function() {
             dayCell.addEventListener('click', function() {
                 selectedDate = new Date(year, month, i);
                 
-                localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
+                localStorage.setItem('villaNovaSelectedDate', selectedDate.toISOString());
                 
                 refreshDateBarText();
                 closeCalendar();
-                document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
+                document.dispatchEvent(new CustomEvent('villaNovaDateChanged', { detail: selectedDate }));
             });
 
             daysGrid.appendChild(dayCell);
@@ -203,11 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open previous day in calendar
     prevDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() - 1);
-        localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
+        localStorage.setItem('villaNovaSelectedDate', selectedDate.toISOString());
         refreshDateBarText();
         displayMonthDate = new Date(selectedDate);
         renderCalendar();
-        document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
+        document.dispatchEvent(new CustomEvent('villaNovaDateChanged', { detail: selectedDate }));
     });
 
 
@@ -216,11 +216,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open next day in calendar
     nextDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() + 1);
-        localStorage.setItem('novaVillaSelectedDate', selectedDate.toISOString());
+        localStorage.setItem('villaNovaSelectedDate', selectedDate.toISOString());
         refreshDateBarText();
         displayMonthDate = new Date(selectedDate);
         renderCalendar();
-        document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
+        document.dispatchEvent(new CustomEvent('villaNovaDateChanged', { detail: selectedDate }));
     });
 
 
@@ -235,6 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     refreshDateBarText();
     setTimeout(() => {
-        document.dispatchEvent(new CustomEvent('novaVillaDateChanged', { detail: selectedDate }));
+        document.dispatchEvent(new CustomEvent('villaNovaDateChanged', { detail: selectedDate }));
     }, 100);
 });
