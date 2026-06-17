@@ -68,10 +68,16 @@ body
 
 
 // ======================= LIGHT THEME OVERRIDES =======================
+html:has(#theme-checkbox:checked)
+    background: radial-gradient(circle at center, #F4EBFF 0%, #DCE7FF 100%)
+
 body:has(#theme-checkbox:checked)
-    background: radial-gradient(circle, #FFF5FA 0%, #E8E2F7 100%)
+    background: transparent
     color: #121128
 
-    &::before
-        opacity: 0.1
-        filter: invert(1)
+    .background-stripes
+        opacity: 0.2
+
+        &::before
+            opacity: 0.05
+            filter: invert(1)

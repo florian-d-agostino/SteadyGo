@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             bookingUrl: "https://openagenda.com"
         },
         {
-            title: "Tournoi de Tennis VillaNova",
+            title: "Tournoi de Tennis SteadyGo",
             category: "Sportif",
             date: "12 Mai 2026",
             address: "Corniche Kennedy, Marseille",
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ];
 
-    let savedDateStr = localStorage.getItem('villaNovaSelectedDate');
+    let savedDateStr = localStorage.getItem('steadyGoSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
 
@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dateStr = event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement");
 
             return {
-                title: event.title?.fr || event.title || "Événement VillaNova",
+                title: event.title?.fr || event.title || "Événement SteadyGo",
                 category: event.category || cat,
                 date: event.date || dateStr,
                 address: event.location?.name || event.location?.address || event.address || "Marseille",
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Custom date changed event
-    document.addEventListener("villaNovaDateChanged", (e) => {
+    document.addEventListener("steadyGoDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndRender();
     });
@@ -473,6 +473,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // Page initialization
+    // initialization
     initPage();
 });

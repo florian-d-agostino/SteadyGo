@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event list state and date state
     let originalEventsList = [];
-    let savedDateStr = localStorage.getItem('villaNovaSelectedDate');
+    let savedDateStr = localStorage.getItem('steadyGoSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
     // Initialize switcher application
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Listen to custom date changed event
-    document.addEventListener("villaNovaDateChanged", (e) => {
+    document.addEventListener("steadyGoDateChanged", (e) => {
         selectedDate = e.detail;
         filterAndDisplayEvents();
     });
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
         eventsToDisplay.forEach(event => {
             const title = event.title?.fr || event.title || "Untitled Event";
             const address = event.location?.name || event.location?.address || "Location unspecified";
-            const bookingUrl = event.registration?.[0]?.value || `https://openagenda.com/villanova/events/${event.slug}` || "#";
+            const bookingUrl = event.registration?.[0]?.value || `https://openagenda.com/steadygo/events/${event.slug}` || "#";
 
             let fallbackImg = "./assets/img/festival.jpg";
             const titleText = title.toLowerCase();

@@ -172,20 +172,22 @@ body:has(#theme-checkbox:checked):has(#pcat-festival:checked) label[for="pcat-fe
 // ======================= LIGHT THEME OVERRIDES =======================
 body:has(#theme-checkbox:checked)
     .partners-frame
-        background-color: rgba(255, 255, 255, 0.9)
-        border-color: rgba(176, 0, 255, 0.2)
-        box-shadow: 0 10px 30px rgba(176, 0, 255, 0.05)
+        background-color: rgba(255, 255, 255, 0.6)
+        backdrop-filter: blur(8px)
+        border-color: rgba(18, 17, 40, 0.08)
+        box-shadow: 0 10px 30px rgba(18, 17, 40, 0.04)
 
         .partner-card
-            background-color: #ffffff
+            background-color: rgba(255, 255, 255, 0.85)
+            backdrop-filter: blur(8px)
             color: #121128
-            border: 1px solid rgba(176, 0, 255, 0.15)
-            box-shadow: 0 4px 15px rgba(176, 0, 255, 0.08)
+            border: 1px solid rgba(18, 17, 40, 0.08)
+            box-shadow: 0 6px 18px rgba(18, 17, 40, 0.03)
 
         .partner-action
-            background-color: #E2DAF5
+            background-color: rgba(224, 213, 247, 0.8)
             color: #121128
-            box-shadow: 0 4px 15px rgba(176, 0, 255, 0.05)
+            box-shadow: 0 4px 15px rgba(18, 17, 40, 0.02)
 
             .action-text
                 color: rgba(18, 17, 40, 0.8)

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeCheckbox = document.getElementById("theme-checkbox");
 
     if (themeCheckbox) {
-        const savedTheme = localStorage.getItem("villaNovaTheme");
+        const savedTheme = localStorage.getItem("steadyGoTheme");
         if (savedTheme === "light") {
             themeCheckbox.checked = true;
         } else {
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Switch theme
         themeCheckbox.addEventListener("change", () => {
             const isLight = themeCheckbox.checked;
-            localStorage.setItem("villaNovaTheme", isLight ? "light" : "dark");
+            localStorage.setItem("steadyGoTheme", isLight ? "light" : "dark");
         });
     }
 });
