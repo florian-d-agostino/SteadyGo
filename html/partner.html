@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,41 +10,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-
-
-
-
-
 <body>
     <input type="radio" name="partner-cat" id="pcat-all" checked style="display:none;">
     <input type="radio" name="partner-cat" id="pcat-sportif" style="display:none;">
     <input type="radio" name="partner-cat" id="pcat-concert" style="display:none;">
     <input type="radio" name="partner-cat" id="pcat-famille" style="display:none;">
     <input type="radio" name="partner-cat" id="pcat-festival" style="display:none;">
-    <div class="background-stripes"></div>
+    <aside class="background-stripes"></aside>
 
-
-
-
-
-
-    <!-- Background withe stars -->
-    <div class="stars"></div>
-
-
-
-
+    <!-- Background with stars -->
+    <aside class="stars"></aside>
 
     <!-- Header -->
     <header class="top-header">
-        <div class="logo-container">
+        <figure class="logo-container">
             <img src="../assets/img/SG%20Logo.png" alt="Logo SteadyGo" class="logo-dark">
             <img src="../assets/img/SG%20Logo.png" alt="Logo SteadyGo" class="logo-light">
-        </div>
+        </figure>
 
         <h1 class="header-title">SteadyGo</h1>
 
-        <div class="theme-toggle-container">
+        <section class="theme-toggle-container">
             <label class="theme-switch" for="theme-checkbox">
                 <input type="checkbox" id="theme-checkbox" aria-label="Basculer entre le thème sombre et clair">
                 <span class="slider">
@@ -57,9 +38,9 @@
                     <span class="slider-icon moon"><i class="fa-solid fa-moon"></i></span>
                 </span>
             </label>
-        </div>
+        </section>
 
-        <div class="header-curve"></div>
+        <span class="header-curve"></span>
 
         <nav class="desktop-nav">
             <a href="../main.html" class="nav-link">Accueil</a>
@@ -68,133 +49,120 @@
             <a href="./partner.html" class="nav-link active">Partenaires</a>
         </nav>
         <input type="checkbox" id="burger-checkbox" class="burger-checkbox" style="display:none;">
-        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
+        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0"
+            aria-label="Ouvrir le menu de navigation">
             <i class="fa-solid fa-bars fa-2x"></i>
         </label>
     </header>
 
-
-
-
-
-
     <!-- Main -->
     <main class="main-container partners-page-container">
 
-
-
-
-
-
         <!-- Intro -->
-        <div class="all-events-divider">
+        <section class="all-events-divider">
             <span class="divider-line"></span>
             <h2>Nos Partenaires</h2>
             <span class="divider-line"></span>
-        </div>
-
-
-
+        </section>
 
         <!-- Categories -->
-        <div class="events-top-controls" style="margin-bottom: 10px;">
-            <div class="categories-wrapper">
-                <input type="checkbox" id="categories-checkbox" class="categories-toggle-checkbox" style="display:none;">
-                <label for="categories-checkbox" class="button-categories" id="categories-btn" role="button" tabindex="0" aria-label="Filtrer les partenaires par catégorie" aria-haspopup="listbox">Catégories</label>
-                <label for="categories-checkbox" class="categories-overlay-close" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:90; cursor:default;"></label>
-                <div class="categories-menu" id="categories-menu">
+        <section class="events-top-controls" style="margin-bottom: 10px;">
+            <nav class="categories-wrapper">
+                <input type="checkbox" id="categories-checkbox" class="categories-toggle-checkbox"
+                    style="display:none;">
+                <label for="categories-checkbox" class="button-categories" id="categories-btn" role="button"
+                    tabindex="0" aria-label="Filtrer les partenaires par catégorie"
+                    aria-haspopup="listbox">Catégories</label>
+                <label for="categories-checkbox" class="categories-overlay-close"
+                    style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:90; cursor:default;"></label>
+                <menu class="categories-menu" id="categories-menu">
                     <label for="pcat-all" class="category-option">Tous</label>
                     <label for="pcat-sportif" class="category-option">Sportif</label>
                     <label for="pcat-concert" class="category-option">Concert</label>
                     <label for="pcat-famille" class="category-option">Famille</label>
                     <label for="pcat-festival" class="category-option">Festival</label>
-                </div>
-            </div>
-        </div>
+                </menu>
+            </nav>
+        </section>
 
-
-
-
-
-
-        <!-- Parteners -->
-        <div class="partners-frame">
-            <div class="partner-item fade-in">
-                <div class="partner-card">
-                    <div class="partner-logo">
+        <!-- Partners -->
+        <section class="partners-frame">
+            <article class="partner-item fade-in">
+                <section class="partner-card">
+                    <h3 class="partner-logo">
                         <i class="fa-solid fa-microphone-lines fa-lg" style="color: #FF2975;"></i>
                         <span>Marseille Arena Jazz</span>
-                    </div>
-                    <div class="partner-tag tag-concert">Concert</div>
-                </div>
-                <div class="partner-action">
+                    </h3>
+                    <span class="partner-tag tag-concert">Concert</span>
+                </section>
+                <footer class="partner-action">
                     <span class="action-text">Réserver vos concerts</span>
-                    <a href="https://www.google.com" target="_blank" class="action-btn" aria-label="Réserver vos concerts sur Marseille Arena Jazz (ouvre un nouvel onglet)">
+                    <a href="https://www.google.com" target="_blank" class="action-btn"
+                        aria-label="Réserver vos concerts sur Marseille Arena Jazz (ouvre un nouvel onglet)">
                         Réserver <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                </div>
-            </div>
-            
-            <div class="partner-item fade-in">
-                <div class="partner-card">
-                    <div class="partner-logo">
+                </footer>
+            </article>
+
+            <article class="partner-item fade-in">
+                <section class="partner-card">
+                    <h3 class="partner-logo">
                         <i class="fa-solid fa-volleyball fa-lg" style="color: #17FF62;"></i>
                         <span>Open de Tennis Sud</span>
-                    </div>
-                    <div class="partner-tag tag-sportif">Sportif</div>
-                </div>
-                <div class="partner-action">
+                    </h3>
+                    <span class="partner-tag tag-sportif">Sportif</span>
+                </section>
+                <footer class="partner-action">
                     <span class="action-text">Acheter vos billets</span>
-                    <a href="https://www.google.com" target="_blank" class="action-btn" aria-label="Acheter vos billets sur Open de Tennis Sud (ouvre un nouvel onglet)">
+                    <a href="https://www.google.com" target="_blank" class="action-btn"
+                        aria-label="Acheter vos billets sur Open de Tennis Sud (ouvre un nouvel onglet)">
                         Réserver <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                </div>
-            </div>
+                </footer>
+            </article>
 
-            <div class="partner-item fade-in">
-                <div class="partner-card">
-                    <div class="partner-logo">
+            <article class="partner-item fade-in">
+                <section class="partner-card">
+                    <h3 class="partner-logo">
                         <i class="fa-solid fa-wand-magic-sparkles fa-lg" style="color: #FFD319;"></i>
                         <span>Family Land Park</span>
-                    </div>
-                    <div class="partner-tag tag-famille">Famille</div>
-                </div>
-                <div class="partner-action">
+                    </h3>
+                    <span class="partner-tag tag-famille">Famille</span>
+                </section>
+                <footer class="partner-action">
                     <span class="action-text">Billetterie ateliers</span>
-                    <a href="https://www.google.com" target="_blank" class="action-btn" aria-label="Accéder à la billetterie ateliers de Family Land Park (ouvre un nouvel onglet)">
+                    <a href="https://www.google.com" target="_blank" class="action-btn"
+                        aria-label="Accéder à la billetterie ateliers de Family Land Park (ouvre un nouvel onglet)">
                         Réserver <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                </div>
-            </div>
+                </footer>
+            </article>
 
-            <div class="partner-item fade-in">
-                <div class="partner-card">
-                    <div class="partner-logo">
+            <article class="partner-item fade-in">
+                <section class="partner-card">
+                    <h3 class="partner-logo">
                         <i class="fa-solid fa-headphones fa-lg" style="color: #B000FF;"></i>
                         <span>Marseille Electronic Fest</span>
-                    </div>
-                    <div class="partner-tag tag-festival">Festival</div>
-                </div>
-                <div class="partner-action">
+                    </h3>
+                    <span class="partner-tag tag-festival">Festival</span>
+                </section>
+                <footer class="partner-action">
                     <span class="action-text">Pass 3 Jours officiels</span>
-                    <a href="https://www.google.com" target="_blank" class="action-btn" aria-label="Réserver votre pass 3 jours sur Marseille Electronic Fest (ouvre un nouvel onglet)">
+                    <a href="https://www.google.com" target="_blank" class="action-btn"
+                        aria-label="Réserver votre pass 3 jours sur Marseille Electronic Fest (ouvre un nouvel onglet)">
                         Réserver <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                </div>
-            </div>
-        </div>
+                </footer>
+            </article>
+        </section>
 
     </main>
 
-
-
-
-
     <!-- Footer -->
     <footer class="bottom-nav">
-        <div class="footer-curved"></div>
+        <span class="footer-curved"></span>
 
-        <div class="nav-items-container">
+        <nav class="nav-items-container">
             <a href="../main.html" class="nav-item">
                 <i class="fa-solid fa-house"></i>
                 <span>Accueil</span>
@@ -211,28 +179,22 @@
                 <i class="fa-solid fa-handshake"></i>
                 <span>Partenaires</span>
             </a>
-        </div>
+        </nav>
     </footer>
 
-
-
-
-
     <!-- Burger Menu -->
-    <div id="burger-menu" class="burger-overlay">
-        <div class="menu-content">
-            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</label>
+    <aside id="burger-menu" class="burger-overlay">
+        <section class="menu-content">
+            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0"
+                aria-label="Fermer le menu de navigation">&times;</label>
             <nav class="menu-nav">
                 <a href="../main.html" class="menu-link">Accueil</a>
                 <a href="./news.html" class="menu-link">News</a>
                 <a href="./event.html" class="menu-link">Événements</a>
                 <a href="./partner.html" class="menu-link">Partenaires</a>
             </nav>
-        </div>
-    </div>
-
-
-
+        </section>
+    </aside>
 
     <script src="../js/menu.js"></script>
 </body>

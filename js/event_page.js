@@ -21,82 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let originalEventsList = [];
     let activeCategory = "Tous";
 
-    // API credentials
-    const OPENAGENDA_API_KEY = "512a334322fe409fbbfb9da05c29440a";
-    const OPENAGENDA_UID = "21769447";
-
-
-
-
-
-    // Offline mock events
-    const MOCK_EVENTS = [
-        {
-            title: "Festival des Arts",
-            category: "Festival",
-            date: "29 Avril 2026",
-            address: "127 Blvd Taschereau, Marseille",
-            image: "../assets/img/festival.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Soirée Jazz au Vieux-Port",
-            category: "Concert",
-            date: "05 Mai 2026",
-            address: "Vieux Port, Marseille",
-            image: "../assets/img/concert.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Tournoi de Tennis SteadyGo",
-            category: "Sportif",
-            date: "12 Mai 2026",
-            address: "Corniche Kennedy, Marseille",
-            image: "../assets/img/sportif - tennis.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Sortie Pique-Nique en Famille",
-            category: "Famille",
-            date: "15 Mai 2026",
-            address: "Parc Borély, Marseille",
-            image: "../assets/img/famille.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Grand Concert Électro",
-            category: "Concert",
-            date: "22 Mai 2026",
-            address: "Le Dôme, Marseille",
-            image: "../assets/img/concert.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Raid VTT Urbain",
-            category: "Sportif",
-            date: "28 Mai 2026",
-            address: "Luminy, Marseille",
-            image: "../assets/img/sportif - tennis.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Foire de Printemps",
-            category: "Festival",
-            date: "02 Juin 2026",
-            address: "Esplanade de la Major, Marseille",
-            image: "../assets/img/festival.jpg",
-            bookingUrl: "https://openagenda.com"
-        },
-        {
-            title: "Chasse au Trésor des Minots",
-            category: "Famille",
-            date: "06 Juin 2026",
-            address: "Palais Longchamp, Marseille",
-            image: "../assets/img/famille.jpg",
-            bookingUrl: "https://openagenda.com"
-        }
-    ];
-
     let savedDateStr = localStorage.getItem('steadyGoSelectedDate');
     let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
 
@@ -136,49 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        await loadEventsData();
-    }
-
-
-
-
-
-    // --------------------- LOAD EVENT DATA --------------------- 
-
-
-
-
-    async function loadEventsData() {
-        if (!OPENAGENDA_API_KEY || !OPENAGENDA_UID) {
-            useMockData();
-            return;
-        }
-
-
-        // OpenAgenda API
-        const url = `https://api.openagenda.com/v2/agendas/${OPENAGENDA_UID}/events?key=${OPENAGENDA_API_KEY}&monolingual=fr&detailed=1&relative%5B0%5D=current&relative%5B1%5D=upcoming&size=100`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error("API Error");
-            const data = await response.json();
-            const apiEvents = data.events || [];
-
-            if (apiEvents.length === 0) {
-                useMockData();
-            } else {
-                originalEventsList = apiEvents;
-                filterAndRender();
-            }
-        } catch (error) {
-            console.warn("Could not connect to OpenAgenda. Using offline mock events.", error);
-            useMockData();
-        }
-    }
-
-
-    // Load mock offline data
-    function useMockData() {
-        originalEventsList = MOCK_EVENTS;
+        console.log("Connecting to SteadyGo API...");
+        originalEventsList = await SteadyGoAPI.loadEvents();
         filterAndRender();
     }
 
@@ -198,23 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const day = d.getDate();
         const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
         return `${day} ${months[d.getMonth()]} ${d.getFullYear()}`;
-    }
-
-    // Parse mock date
-    function parseMockDate(dateStr) {
-        if (!dateStr) return "";
-        const parts = dateStr.split(" ");
-        if (parts.length < 3) return "";
-        const day = parts[0].padStart(2, "0");
-        const monthName = parts[1].toLowerCase();
-        const year = parts[2];
-        
-        const months = {
-            "janvier": "01", "février": "02", "mars": "03", "avril": "04", "mai": "05", "juin": "06",
-            "juillet": "07", "août": "08", "septembre": "09", "octobre": "10", "novembre": "11", "décembre": "12"
-        };
-        const month = months[monthName] || "04";
-        return `${year}-${month}-${day}`;
     }
 
 
@@ -248,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     eventDate.setHours(0, 0, 0, 0);
                     return eventDate >= targetDate;
                 } else {
-                    const eventDateStr = parseMockDate(dateStr);
+                    const eventDateStr = SteadyGoAPI.parseMockDate(dateStr);
                     if (eventDateStr) {
                         const eventDate = new Date(eventDateStr);
                         eventDate.setHours(0, 0, 0, 0);
@@ -265,45 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Map data structure
         const mappedEvents = dateFilteredEvents.map(event => {
-            let cat = "Festival";
-            const titleText = (event.title?.fr || event.title || "").toLowerCase();
-            if (titleText.includes("concert") || titleText.includes("jazz") || titleText.includes("musique")) {
-                cat = "Concert";
-            } else if (titleText.includes("sport") || titleText.includes("tennis") || titleText.includes("marathon") || titleText.includes("vélo") || titleText.includes("ride") || titleText.includes("challenge")) {
-                cat = "Sportif";
-            } else if (titleText.includes("famille") || titleText.includes("enfant") || titleText.includes("atelier")) {
-                cat = "Famille";
-            }
-
-
-
-            // Category image
-            let img = "../assets/img/festival.jpg";
-            if (cat === "Concert") img = "../assets/img/concert.jpg";
-            if (cat === "Sportif") img = "../assets/img/sportif - tennis.jpg";
-            if (cat === "Famille") img = "../assets/img/famille.jpg";
-
-            let realImg = img;
-            if (event.image) {
-                if (typeof event.image === "string") {
-                    realImg = event.image;
-                } else if (event.image.base && event.image.filename) {
-                    realImg = event.image.base + event.image.filename;
-                } else if (event.image.square) {
-                    realImg = event.image.square;
-                } else if (event.image.original) {
-                    realImg = event.image.original;
-                }
-            }
-
+            const { title, category, image } = SteadyGoAPI.getEventDetails(event);
             const dateStr = event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement");
 
             return {
-                title: event.title?.fr || event.title || "Événement SteadyGo",
-                category: event.category || cat,
+                title,
+                category,
                 date: event.date || dateStr,
                 address: event.location?.name || event.location?.address || event.address || "Marseille",
-                image: realImg,
+                image,
                 bookingUrl: event.registration?.[0]?.value || event.bookingUrl || "#"
             };
         });
@@ -313,8 +149,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // Filter events by category
-        const eventsToShow = activeCategory === "Tous" 
-            ? mappedEvents 
+        const eventsToShow = activeCategory === "Tous"
+            ? mappedEvents
             : mappedEvents.filter(e => e.category === activeCategory);
 
         renderCarousel(eventsToShow);
@@ -344,12 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (events.length === 0) {
             carouselContainer.innerHTML = `
-                <div class="main-card" style="display:flex; justify-content:center; align-items:center; text-align:center; padding:20px; color:inherit;">
-                    <div>
+                <li class="main-card empty">
+                    <section>
                         <h3>Aucun événement</h3>
-                        <p style="font-size:0.8rem; margin-top:5px;">Il n'y a aucun événement planifié à partir de cette date dans cette catégorie.</p>
-                    </div>
-                </div>
+                        <p>Il n'y a aucun événement planifié à partir de cette date dans cette catégorie.</p>
+                    </section>
+                </li>
             `;
             if (prevBtn) prevBtn.style.display = "none";
             if (nextBtn) nextBtn.style.display = "none";
@@ -358,16 +194,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         events.forEach(event => {
             const cardHTML = `
-                <div class="main-card">
-                    <div class="card-header">${event.title}</div>
-                    <div class="card-body">
+                <li class="main-card">
+                    <header class="card-header">${event.title}</header>
+                    <section class="card-body">
                         <img src="${event.image}" alt="${event.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='../assets/map.png';">
-                    </div>
-                    <div class="card-footer">
+                    </section>
+                    <footer class="card-footer">
                         ${event.address}
-                        <div class="button-booking" onclick="window.open('${event.bookingUrl}', '_blank')">Reservation</div>
-                    </div>
-                </div>
+                        <button class="button-booking" onclick="window.open('${event.bookingUrl}', '_blank')">Reservation</button>
+                    </footer>
+                </li>
             `;
             carouselContainer.insertAdjacentHTML("beforeend", cardHTML);
         });
@@ -441,9 +277,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (events.length === 0) {
             gridContainer.innerHTML = `
-                <div class="empty-grid-message">
+                <section class="empty-grid-message">
                     <p>Aucun événement dans cette catégorie pour le moment.</p>
-                </div>
+                </section>
             `;
             return;
         }
@@ -451,20 +287,20 @@ document.addEventListener("DOMContentLoaded", () => {
         events.forEach(event => {
             const catClass = event.category.toLowerCase();
             const gridCardHTML = `
-                <div class="event-grid-card ${catClass} fade-in">
-                    <div class="grid-card-img-wrapper">
+                <article class="event-grid-card ${catClass} fade-in">
+                    <figure class="grid-card-img-wrapper">
                         <img src="${event.image}" alt="${event.title}" onerror="this.src='../assets/map.png';">
                         <span class="category-badge ${catClass}">${event.category}</span>
-                    </div>
-                    <div class="grid-card-content">
+                    </figure>
+                    <section class="grid-card-content">
                         <h3 class="grid-card-title">${event.title}</h3>
-                        <div class="grid-card-meta">
+                        <footer class="grid-card-meta">
                             <p class="grid-card-date"><i class="fa-regular fa-calendar-days"></i> ${event.date}</p>
                             <p class="grid-card-address"><i class="fa-solid fa-location-dot"></i> ${event.address}</p>
-                        </div>
+                        </footer>
                         <button class="button-booking" onclick="window.open('${event.bookingUrl}', '_blank')">Reservation</button>
-                    </div>
-                </div>
+                    </section>
+                </article>
             `;
             gridContainer.insertAdjacentHTML("beforeend", gridCardHTML);
         });

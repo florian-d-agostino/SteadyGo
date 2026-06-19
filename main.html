@@ -7,7 +7,8 @@
     <title>SteadyGo</title>
 
     <link rel="stylesheet" href="./sass/style_main.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -27,14 +28,14 @@
 
     <!-- HEADER -->
     <header class="top-header">
-        <div class="logo-container">
+        <figure class="logo-container">
             <img src="./assets/img/SG%20Logo.png" alt="Logo SteadyGo" class="logo-dark">
             <img src="./assets/img/SG%20Logo.png" alt="Logo SteadyGo" class="logo-light">
-        </div>
+        </figure>
 
         <h1 class="header-title">SteadyGo</h1>
 
-        <div class="theme-toggle-container">
+        <section class="theme-toggle-container">
             <label class="theme-switch" for="theme-checkbox">
                 <input type="checkbox" id="theme-checkbox" aria-label="Basculer entre le thème sombre et clair">
                 <span class="slider">
@@ -42,9 +43,9 @@
                     <span class="slider-icon moon"><i class="fa-solid fa-moon"></i></span>
                 </span>
             </label>
-        </div>
+        </section>
 
-        <div class="header-curve"></div>
+        <span class="header-curve"></span>
 
         <nav class="desktop-nav">
             <a href="./main.html" class="nav-link active">Accueil</a>
@@ -53,7 +54,8 @@
             <a href="./html/partner.html" class="nav-link">Partenaires</a>
         </nav>
         <input type="checkbox" id="burger-checkbox" class="burger-checkbox" style="display:none;">
-        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0" aria-label="Ouvrir le menu de navigation">
+        <label for="burger-checkbox" class="menu-icon" role="button" tabindex="0"
+            aria-label="Ouvrir le menu de navigation">
             <i class="fa-solid fa-bars fa-2x"></i>
         </label>
     </header>
@@ -65,11 +67,11 @@
 
 
     <!-- INTRO -->
-    <div class="all-events-divider">
+    <section class="all-events-divider">
         <span class="divider-line"></span>
         <h2>Découvrir les événements</h2>
         <span class="divider-line"></span>
-    </div>
+    </section>
 
 
 
@@ -81,109 +83,120 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-container">
-        
-        <div class="desktop-left">
-            <div class="categories-wrapper">
-                <input type="checkbox" id="categories-checkbox" class="categories-toggle-checkbox" style="display:none;">
-                <label for="categories-checkbox" class="button-categories" id="categories-btn" role="button" tabindex="0" aria-label="Filtrer les événements par catégorie" aria-haspopup="listbox">Catégories</label>
-                <label for="categories-checkbox" class="categories-overlay-close" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:90; cursor:default;"></label>
-                <div class="categories-menu" id="categories-menu">
+
+        <section class="desktop-left">
+            <nav class="categories-wrapper">
+                <input type="checkbox" id="categories-checkbox" class="categories-toggle-checkbox"
+                    style="display:none;">
+                <label for="categories-checkbox" class="button-categories" id="categories-btn" role="button"
+                    tabindex="0" aria-label="Filtrer les événements par catégorie"
+                    aria-haspopup="listbox">Catégories</label>
+                <label for="categories-checkbox" class="categories-overlay-close"
+                    style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:90; cursor:default;"></label>
+                <menu class="categories-menu" id="categories-menu">
                     <label for="categories-checkbox" class="category-option" data-category="Tous">Tous</label>
                     <label for="categories-checkbox" class="category-option" data-category="Sportif">Sportif</label>
                     <label for="categories-checkbox" class="category-option" data-category="Concert">Concert</label>
                     <label for="categories-checkbox" class="category-option" data-category="Famille">Famille</label>
                     <label for="categories-checkbox" class="category-option" data-category="Festival">Festival</label>
-                </div>
-            </div>
+                </menu>
+            </nav>
 
             <section class="action-bar">
-                <div class="date-input-container">
-                    <button class="arrow-btn-prev" aria-label="Jour précédent"><i class="fa-solid fa-circle-arrow-left"></i></button>
-                    <div class="date-display">
+                <section class="date-input-container">
+                    <button class="arrow-btn-prev" aria-label="Jour précédent"><i
+                            class="fa-solid fa-circle-arrow-left"></i></button>
+                    <time class="date-display">
                         <span id="date-text">29 Avril 2026</span>
-                    </div>
-                    <button class="arrow-btn-next" aria-label="Jour suivant"><i class="fa-solid fa-circle-arrow-right"></i></button>
-                </div>
+                    </time>
+                    <button class="arrow-btn-next" aria-label="Jour suivant"><i
+                            class="fa-solid fa-circle-arrow-right"></i></button>
+                </section>
                 <button class="calendar-btn" aria-label="Ouvrir le calendrier pour choisir une date">
                     <i class="fa-regular fa-calendar"></i>
                 </button>
             </section>
 
             <section class="switcher">
-                <div class="switcher-left" id="prev-event" role="button" tabindex="0" aria-label="Événement précédent"><i class="fa-solid fa-chevron-left"></i></div>
+                <button class="switcher-left" id="prev-event" aria-label="Événement précédent"><i
+                        class="fa-solid fa-chevron-left"></i></button>
 
-                <div class="cards-viewport">
-                    <div class="cards-container" id="events-container">
-                        <div class="main-card">
-                            <div class="card-header">Festival des Arts</div>
-                            <div class="card-body"></div>
-                            <div class="card-footer">
+                <section class="cards-viewport">
+                    <ul class="cards-container" id="events-container">
+                        <li class="main-card">
+                            <header class="card-header">Festival des Arts</header>
+                            <section class="card-body"></section>
+                            <footer class="card-footer">
                                 127 Boulevard Taschereau, Marseille
-                                <div class="button-booking">Reservation</div>
-                            </div>
-                        </div>
+                                <button class="button-booking">Reservation</button>
+                            </footer>
+                        </li>
 
-                        <div class="main-card">
-                            <div class="card-header">Soirée Jazz</div>
-                            <div class="card-body"></div>
-                            <div class="card-footer">
+                        <li class="main-card">
+                            <header class="card-header">Soirée Jazz</header>
+                            <section class="card-body"></section>
+                            <footer class="card-footer">
                                 Vieux Port, Marseille
-                                <div class="button-booking">Reservation</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <button class="button-booking">Reservation</button>
+                            </footer>
+                        </li>
+                    </ul>
+                </section>
 
-                <div class="switcher-right" id="next-event" role="button" tabindex="0" aria-label="Événement suivant"><i class="fa-solid fa-chevron-right"></i></div>
+                <button class="switcher-right" id="next-event" aria-label="Événement suivant"><i
+                        class="fa-solid fa-chevron-right"></i></button>
             </section>
-        </div>
+        </section>
 
-        <div class="desktop-right">
-            <div class="title-map">Evénements</div>
+        <section class="desktop-right">
+            <h2 class="title-map">Evénements</h2>
             <section class="map-container">
                 <div class="map-view" id="map"></div>
 
-                <div id="custom-popup" class="map-popup">
-                    <div class="popup-container">
-                        <span class="close-popup" role="button" tabindex="0" aria-label="Fermer les détails de l'événement">&times;</span>
-                        
-                        <div class="popup-header">
+                <article id="custom-popup" class="map-popup">
+                    <section class="popup-container">
+                        <span class="close-popup" role="button" tabindex="0"
+                            aria-label="Fermer les détails de l'événement">&times;</span>
+
+                        <header class="popup-header">
                             <h3 id="popup-title">Festival des Arts</h3>
-                            <div class="popup-date-badge" id="popup-date">29 Avril</div>
-                        </div>
+                            <time class="popup-date-badge" id="popup-date">29 Avril</time>
+                        </header>
 
-                        <div class="popup-body">
-                            <img id="popup-img" src="./assets/map.png" alt="Event">
-                        </div>
+                        <section class="popup-body">
+                            <img id="popup-img" src="./assets/map.png" alt="Event" loading="lazy">
+                        </section>
 
-                        <div class="popup-footer">
-                            <div class="popup-address" id="popup-address">127 Blvd Taschereau, Marseille</div>
-                            <button class="popup-reserve-btn" aria-label="Réserver pour cet événement">Reservation</button>
-                        </div>
-                    </div>
-                </div>
+                        <footer class="popup-footer">
+                            <address class="popup-address" id="popup-address">127 Blvd Taschereau, Marseille</address>
+                            <button class="popup-reserve-btn"
+                                aria-label="Réserver pour cet événement">Reservation</button>
+                        </footer>
+                    </section>
+                </article>
 
-                <div class="map-legend">
-                    <div class="legend-col">
-                        <div class="legend-item">
+                <aside class="map-legend">
+                    <ul class="legend-col">
+                        <li class="legend-item">
                             <span class="color-box green"></span>
-                            <div class="line"></div>Sportif
-                        </div>
+                            <span class="line"></span>Sportif
+                        </li>
 
-                        <div class="legend-item">
+                        <li class="legend-item">
                             <span class="color-box red"></span>
-                            <div class="line"></div>Concert
-                        </div>
-                    </div>
+                            <span class="line"></span>Concert
+                        </li>
+                    </ul>
 
-                    <div class="legend-col">
-                        <div class="legend-item">Famille<div class="line"></div><span class="color-box yellow"></span></div>
-                        <div class="legend-item">Festival<div class="line"></div><span class="color-box blue"></span></div>
-                    </div>
-                </div>
+                    <ul class="legend-col">
+                        <li class="legend-item">Famille<span class="line"></span><span class="color-box yellow"></span>
+                        </li>
+                        <li class="legend-item">Festival<span class="line"></span><span class="color-box blue"></span>
+                        </li>
+                    </ul>
+                </aside>
             </section>
-        </div>
-
+        </section>
     </main>
 
 
@@ -193,9 +206,9 @@
 
     <!-- FOOTER / BOTTOM NAV -->
     <footer class="bottom-nav">
-        <div class="footer-curved"></div>
+        <span class="footer-curved"></span>
 
-        <div class="nav-items-container">
+        <nav class="nav-items-container">
             <a href="./main.html" class="nav-item active">
                 <i class="fa-solid fa-house"></i>
                 <span>Accueil</span>
@@ -212,7 +225,7 @@
                 <i class="fa-solid fa-handshake"></i>
                 <span>Partenaires</span>
             </a>
-        </div>
+        </nav>
     </footer>
 
 
@@ -220,8 +233,7 @@
 
 
 
-
-                    <!-- ===== EVENT JS ===== -->
+    <!-- ===== EVENT JS ===== -->
 
 
 
@@ -229,17 +241,18 @@
 
 
     <!-- Burger Menu Overlay -->
-    <div id="burger-menu" class="burger-overlay">
-        <div class="menu-content">
-            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0" aria-label="Fermer le menu de navigation">&times;</label>
+    <aside id="burger-menu" class="burger-overlay">
+        <section class="menu-content">
+            <label for="burger-checkbox" class="close-menu" role="button" tabindex="0"
+                aria-label="Fermer le menu de navigation">&times;</label>
             <nav class="menu-nav">
                 <a href="./main.html" class="menu-link">Accueil</a>
                 <a href="./html/news.html" class="menu-link">News</a>
                 <a href="./html/event.html" class="menu-link">Événements</a>
                 <a href="./html/partner.html" class="menu-link">Partenaires</a>
             </nav>
-        </div>
-    </div>
+        </section>
+    </aside>
 
 
 
@@ -248,20 +261,26 @@
 
 
     <!-- Calendar Modal -->
-    <div id="calendar-modal" class="calendar-overlay">
-        <div class="calendar-container">
-            <div class="calendar-header">
+    <section id="calendar-modal" class="calendar-overlay">
+        <section class="calendar-container">
+            <header class="calendar-header">
                 <button id="prev-month" aria-label="Mois précédent"><i class="fa-solid fa-chevron-left"></i></button>
                 <h2 id="current-month-year">Avril 2026</h2>
                 <button id="next-month" aria-label="Mois suivant"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-            <div class="calendar-weekdays">
-                <div>Lun</div><div>Mar</div><div>Mer</div><div>Jeu</div><div>Ven</div><div>Sam</div><div>Dim</div>
-            </div>
-            <div id="calendar-days" class="calendar-days">
-            </div>
-        </div>
-    </div>
+            </header>
+            <ul class="calendar-weekdays">
+                <li>Lun</li>
+                <li>Mar</li>
+                <li>Mer</li>
+                <li>Jeu</li>
+                <li>Ven</li>
+                <li>Sam</li>
+                <li>Dim</li>
+            </ul>
+            <ul id="calendar-days" class="calendar-days">
+            </ul>
+        </section>
+    </section>
 
 
 
@@ -270,9 +289,11 @@
 
 
     <!-- SCRIPTS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="./js/api.js"></script>
     <script src="./js/map.js"></script>
-    <script src="./js/switcher.js"></script>
+    <script src="./js/carousel.js"></script>
     <script src="./js/menu.js"></script>
     <script src="./js/calendar.js"></script>
 </body>

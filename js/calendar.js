@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Render empty cell offsets
         for (let i = 0; i < offset; i++) {
-            let emptyCell = document.createElement('div');
+            let emptyCell = document.createElement('li');
             emptyCell.classList.add('day');
             emptyCell.classList.add('empty');
             daysGrid.appendChild(emptyCell);
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Render month days
         for (let i = 1; i <= lastDayOfMonth; i++) {
-            let dayCell = document.createElement('div');
+            let dayCell = document.createElement('li');
             dayCell.classList.add('day');
             dayCell.innerText = i;
 

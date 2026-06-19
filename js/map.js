@@ -330,67 +330,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                 rawApiEvents = apiEvents.map(event => {
-
-                    
-                    let cat = "Festival";
-                    let color = "#B000FF";
-                    const titleText = (event.title?.fr || event.title || "").toLowerCase();
-                    if (titleText.includes("concert") || titleText.includes("jazz") || titleText.includes("musique")) {
-                        cat = "Concert";
-                        color = "#FF2975";
-
-
-
-                    } else if (titleText.includes("sport") || titleText.includes("tennis") || titleText.includes("marathon") || titleText.includes("vélo") || titleText.includes("ride") || titleText.includes("challenge")) {
-                        cat = "Sportif";
-                        color = "#17FF62";
-
-
-
-                    } else if (titleText.includes("famille") || titleText.includes("enfant") || titleText.includes("atelier")) {
-                        cat = "Famille";
-                        color = "#FFD319";
-                    }
-
-
-
-
-                    // Default image
-                    let img = "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400";
-                    if (cat === "Concert") img = "https://images.unsplash.com/photo-1511192303578-4a7b974a4286?w=400";
-                    if (cat === "Sportif") img = "https://images.unsplash.com/photo-1530549387631-afb168514626?w=400";
-                    if (cat === "Famille") img = "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=400";
-
-
-
-
-                    let realImg = img;
-                    if (event.image) {
-                        if (typeof event.image === "string") {
-                            realImg = event.image;
-                        } else if (event.image.base && event.image.filename) {
-                            realImg = event.image.base + event.image.filename;
-                        } else if (event.image.square) {
-                            realImg = event.image.square;
-                        } else if (event.image.original) {
-                            realImg = event.image.original;
-                        }
-                    }
-
-
-
-
-                    // Default location
+                    const { title, category, color, image } = SteadyGoAPI.getEventDetails(event);
                     let lat = event.location?.latitude || 43.2965;
                     let lng = event.location?.longitude || 5.3698;
 
                     return {
-                        name: event.title?.fr || event.title || "Événement SteadyGo",
+                        name: title,
                         date: event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement"),
                         location: event.location?.name || event.location?.address || "Marseille",
-                        image: realImg,
+                        image: image,
                         gps: [lat, lng],
-                        type: cat,
+                        type: category,
                         color: color,
                         rawTimings: event.timings,
                         rawDate: event.timings?.[0]?.start
