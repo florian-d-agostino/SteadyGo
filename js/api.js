@@ -19,7 +19,11 @@ const SteadyGoAPI = {
 
 
 
-    // Mock data
+
+
+
+
+    // Mock data if Open Agenda is Offline
     MOCK_EVENTS: [
         {
             title: "Festival des Arts",
@@ -94,9 +98,11 @@ const SteadyGoAPI = {
 
 
     /**
-     * Resolves the correct relative path for assets depending on page location.
-     * Prepend ../ if running inside html/ subfolder.
+     * Resolve Assets Path
      */
+
+
+    // Folder Nav for assets
     getAssetPath(relativePath) {
         if (!relativePath) return "";
         const isSubPage = window.location.pathname.includes('/html/');
@@ -110,9 +116,16 @@ const SteadyGoAPI = {
 
 
 
+
+
     /**
      * Helper to parse French date into ISO YYYY-MM-DD
      */
+
+
+
+
+    // Date day/month/year 
     parseMockDate(dateStr) {
         if (!dateStr) return "";
         const parts = dateStr.split(" ");
@@ -136,12 +149,15 @@ const SteadyGoAPI = {
 
 
 
+
+
     /**
      * Fetch events from OpenAgenda API or fallback to mock data
-     * Optimized with LocalStorage caching for Eco-design / Green IT.
      */
 
 
+
+     // Cache reset Eco
     async loadEvents() {
         const CACHE_KEY = "steadygo_events_cache";
         const CACHE_TIME_KEY = "steadygo_events_cache_time";
@@ -157,7 +173,7 @@ const SteadyGoAPI = {
 
 
 
-        // for eco-design: load from cache if valid
+        // Calculate cache is under 15 minutes
         if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
             return JSON.parse(cachedData);
         }

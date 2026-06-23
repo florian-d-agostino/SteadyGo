@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Map configuration
-    var myMap = L.map('map').setView([43.2965, 5.3698], 13);
+    var myMap = L.map('map').setView([43.2965, 5.3698], 13); // Coordinates Marseille
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
@@ -89,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // ----------------- MARKER RENDERING ----------------- 
+    // ----------------- MARKERS ----------------- 
 
 
 
 
-    // Markers renderer
+    // Markers render
     var markerGroup = L.layerGroup().addTo(myMap);
 
 
