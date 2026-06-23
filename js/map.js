@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=400",
             gps: [43.2965, 5.3698],
             type: "Festival",
-            color: "#B000FF"
+            color: "#B000FF",
+            bookingUrl: "https://openagenda.com"
         },
         {
             name: "Soirée Jazz",
@@ -62,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "https://images.unsplash.com/photo-1511192303578-4a7b974a4286?w=400",
             gps: [43.2850, 5.3750],
             type: "Concert",
-            color: "#FF2975"
+            color: "#FF2975",
+            bookingUrl: "https://openagenda.com"
         },
         {
             name: "Marathon Marseille",
@@ -71,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "https://images.unsplash.com/photo-1530549387631-afb168514626?w=400",
             gps: [43.3000, 5.3800],
             type: "Sportif",
-            color: "#17FF62"
+            color: "#17FF62",
+            bookingUrl: "https://openagenda.com"
         },
         {
             name: "Sortie Famille Parc",
@@ -80,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=400",
             gps: [43.2600, 5.3800],
             type: "Famille",
-            color: "#FFD319"
+            color: "#FFD319",
+            bookingUrl: "https://openagenda.com"
         }
     ];
 
@@ -129,6 +133,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('popup-address').innerText = this.options.eventLocation;
                     document.getElementById('popup-img').src = this.options.eventImage;
 
+                    // Set reservation button click action to open the booking URL
+                    var reserveBtn = document.querySelector('.popup-reserve-btn');
+                    if (reserveBtn) {
+                        var bookingUrl = this.options.eventBookingUrl;
+                        reserveBtn.onclick = function() {
+                            window.open(bookingUrl, '_blank');
+                        };
+                    }
+
                     var popupElement = document.getElementById('custom-popup');
                     popupElement.style.background = "radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, " + this.options.eventColor + " 100%)";
                     popupElement.classList.add('active');
@@ -139,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 marker.options.eventLocation = event.location;
                 marker.options.eventImage = event.image;
                 marker.options.eventColor = event.color;
+                marker.options.eventBookingUrl = event.bookingUrl || "https://openagenda.com";
 
                 marker.addTo(markerGroup);
             }
@@ -297,7 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     gps: ev.gps,
                     type: ev.type,
                     color: ev.color,
-                    rawDate: ev.date
+                    rawDate: ev.date,
+                    bookingUrl: ev.bookingUrl || "https://openagenda.com"
                 };
             });
             filterAndDisplayPoints();
@@ -323,7 +338,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         gps: ev.gps,
                         type: ev.type,
                         color: ev.color,
-                        rawDate: ev.date
+                        rawDate: ev.date,
+                        bookingUrl: ev.bookingUrl || "https://openagenda.com"
                     };
                 });
             } else {
@@ -343,7 +359,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         type: category,
                         color: color,
                         rawTimings: event.timings,
-                        rawDate: event.timings?.[0]?.start
+                        rawDate: event.timings?.[0]?.start,
+                        bookingUrl: event.registration?.[0]?.value || (event.slug ? `https://openagenda.com/steadygo/events/${event.slug}` : "") || "https://openagenda.com"
                     };
                 });
             }
@@ -363,7 +380,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     gps: ev.gps,
                     type: ev.type,
                     color: ev.color,
-                    rawDate: ev.date
+                    rawDate: ev.date,
+                    bookingUrl: ev.bookingUrl || "https://openagenda.com"
                 };
             });
         }
