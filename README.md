@@ -1,6 +1,5 @@
-# 🌟 SteadyGo - VillaNova
-
-Bienvenue dans le dépôt de **SteadyGo**, une application web moderne, interactive et responsive conçue pour répertorier et réserver des événements culturels, sportifs et musicaux à la VillaNova (Marseille).
+# 🌟 SteadyGo
+Bienvenue dans le dépôt de **SteadyGo**, une application web moderne, interactive et responsive conçue pour répertorier et réserver des événements culturels, sportifs et musicaux à Marseille.
 
 L'application arbore un design rétro-futuriste soigné combinant des effets de néon, de glassmorphisme et une palette de couleurs harmonieuse et vibrante.
 
@@ -31,7 +30,7 @@ L'application arbore un design rétro-futuriste soigné combinant des effets de 
 ## 📂 Structure du Projet
 
 ```text
-VillaNova/
+SteadyGo/
 ├── main.html               # Page d'accueil principale (Carte + Événements du jour)
 ├── assets/                 # Ressources statiques
 │   ├── img/                # Images et logos (dont SG Logo.png, concert.jpg, etc.)
