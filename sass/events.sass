@@ -20,14 +20,12 @@
             height: 40px
             background-color: $color-yellow
             border-radius: 20px
-            display: flex
-            justify-content: center
-            align-items: center
+            +center-flex
             color: $color-dark-blue
             font-size: 0.95rem
             font-weight: bold
             cursor: pointer
-            transition: all 0.2s ease
+            +smooth-transition
             padding: 0 25px
             box-sizing: border-box
 
@@ -167,12 +165,10 @@
         height: 35px
         background-color: $color-yellow
         border-radius: 50%
-        display: flex
-        justify-content: center
-        align-items: center
+        +center-flex
         color: #000
         cursor: pointer
-        transition: all 0.2s ease
+        +smooth-transition
         z-index: 10
         box-shadow: 0 2px 8px rgba(0,0,0,0.2)
         

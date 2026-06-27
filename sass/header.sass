@@ -19,9 +19,7 @@
         left: 50%
         transform: translateX(-50%)
         width: auto
-        display: flex
-        justify-content: center
-        align-items: center
+        +center-flex
         z-index: 10
 
         .theme-switch
@@ -98,9 +96,7 @@
         width: 120px
         height: 60px
         padding: 5px
-        display: flex
-        justify-content: center
-        align-items: center
+        +center-flex
         flex-shrink: 0
         overflow: visible
         transform: rotate(-15deg) translateY(8px) translateX(-15px)
@@ -146,13 +142,11 @@
         height: 60px
         background-color: $color-violet
         border-radius: 50%
-        display: flex
-        justify-content: center
-        align-items: center
+        +center-flex
         color: #ffffff
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3)
         cursor: pointer
-        transition: transform 0.2s ease, background-color 0.2s ease
+        +smooth-transition
 
         &:hover
             transform: scale(1.1)
