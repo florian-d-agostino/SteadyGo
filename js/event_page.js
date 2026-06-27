@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let originalEventsList = [];
     let activeCategory = "Tous";
 
-    let savedDateStr = localStorage.getItem('steadyGoSelectedDate');
-    let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
+    let savedDateStr = sessionStorage.getItem('steadyGoSelectedDate');
+    let selectedDate = savedDateStr ? new Date(savedDateStr) : new Date();
 
 
 
@@ -101,9 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const dateFilteredEvents = originalEventsList.filter(event => {
             if (event.timings && event.timings.length > 0) {
                 return event.timings.some(timing => {
+                    const startStr = timing.begin || timing.start;
+                    if (!startStr) return false;
+                    const startDate = new Date(startStr);
+                    startDate.setHours(0, 0, 0, 0);
                     const endDate = new Date(timing.end);
                     endDate.setHours(0, 0, 0, 0);
-                    return endDate >= targetDate;
+                    return targetDate >= startDate && targetDate <= endDate;
                 });
             }
 
@@ -112,13 +116,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (dateStr.includes("-")) {
                     const eventDate = new Date(dateStr);
                     eventDate.setHours(0, 0, 0, 0);
-                    return eventDate >= targetDate;
+                    return eventDate.getTime() === targetDate.getTime();
                 } else {
                     const eventDateStr = SteadyGoAPI.parseMockDate(dateStr);
                     if (eventDateStr) {
                         const eventDate = new Date(eventDateStr);
                         eventDate.setHours(0, 0, 0, 0);
-                        return eventDate >= targetDate;
+                        return eventDate.getTime() === targetDate.getTime();
                     }
                 }
             }
@@ -132,7 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Map data structure
         const mappedEvents = dateFilteredEvents.map(event => {
             const { title, category, image } = SteadyGoAPI.getEventDetails(event);
-            const dateStr = event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement");
+            const startStr = event.timings?.[0]?.begin || event.timings?.[0]?.start;
+            const dateStr = event.dateRange || (startStr ? formatDate(startStr) : "Prochainement");
 
             return {
                 title,

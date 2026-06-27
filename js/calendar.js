@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
         "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
     ];
 
-    let savedDate = localStorage.getItem('steadyGoSelectedDate');
+    let savedDate = sessionStorage.getItem('steadyGoSelectedDate');
     
     let selectedDate;
     if (savedDate) {
         selectedDate = new Date(savedDate);
     } else {
-        selectedDate = new Date("2026-04-29");
+        selectedDate = new Date();
     }
 
     let displayMonthDate = new Date(selectedDate);
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Render calendar
+    // Empty calendar
     function renderCalendar() {
         daysGrid.innerHTML = '';
         
@@ -72,6 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         monthYearText.innerText = monthNames[month] + " " + year;
 
+
+
+
+        // First day of month calculator
         let firstDayOfMonth = new Date(year, month, 1).getDay();
         let offset;
         if (firstDayOfMonth === 0) {
@@ -80,12 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
             offset = firstDayOfMonth - 1;
         }
 
+
+
+
+        // Last day of month calculator
         let lastDayOfMonth = new Date(year, month + 1, 0).getDate();
 
 
 
 
-        // Render empty cell offsets
+        // Empty cell offset calculator
         for (let i = 0; i < offset; i++) {
             let emptyCell = document.createElement('li');
             emptyCell.classList.add('day');
@@ -93,6 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
             daysGrid.appendChild(emptyCell);
         }
 
+
+
+        // Today calculator
         let today = new Date();
 
 
@@ -119,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dayCell.addEventListener('click', function() {
                 selectedDate = new Date(year, month, i);
                 
-                localStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
+                sessionStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
                 
                 refreshDateBarText();
                 closeCalendar();
@@ -203,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open previous day in calendar
     prevDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() - 1);
-        localStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
+        sessionStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
         refreshDateBarText();
         displayMonthDate = new Date(selectedDate);
         renderCalendar();
@@ -216,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open next day in calendar
     nextDayBtn.addEventListener('click', function() {
         selectedDate.setDate(selectedDate.getDate() + 1);
-        localStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
+        sessionStorage.setItem('steadyGoSelectedDate', selectedDate.toISOString());
         refreshDateBarText();
         displayMonthDate = new Date(selectedDate);
         renderCalendar();

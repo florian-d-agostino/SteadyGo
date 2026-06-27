@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const OPENAGENDA_UID = "21769447";
 
     var eventList = [];
-    var savedDateStr = localStorage.getItem('steadyGoSelectedDate');
-    var selectedFilterDate = savedDateStr ? new Date(savedDateStr) : new Date("2026-04-29");
+    var savedDateStr = sessionStorage.getItem('steadyGoSelectedDate');
+    var selectedFilterDate = savedDateStr ? new Date(savedDateStr) : new Date();
     var selectedFilterCategory = "Tous";
     var rawApiEvents = [];
 
@@ -262,9 +262,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (event.rawTimings && event.rawTimings.length > 0) {
                 return event.rawTimings.some(function(timing) {
+                    var startStr = timing.begin || timing.start;
+                    if (!startStr) return false;
+                    var startDate = new Date(startStr);
+                    startDate.setHours(0, 0, 0, 0);
                     var endDate = new Date(timing.end);
                     endDate.setHours(0, 0, 0, 0);
-                    return endDate >= targetDate;
+                    return targetDate >= startDate && targetDate <= endDate;
                 });
             }
 
@@ -272,13 +276,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (event.rawDate.includes("-")) {
                     var eventDate = new Date(event.rawDate);
                     eventDate.setHours(0, 0, 0, 0);
-                    return eventDate >= targetDate;
+                    return eventDate.getTime() === targetDate.getTime();
                 } else {
                     var dateStr = parseMockDate(event.rawDate);
                     if (dateStr) {
                         var eventDate = new Date(dateStr);
                         eventDate.setHours(0, 0, 0, 0);
-                        return eventDate >= targetDate;
+                        return eventDate.getTime() === targetDate.getTime();
                     }
                 }
             }
@@ -349,17 +353,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     const { title, category, color, image } = SteadyGoAPI.getEventDetails(event);
                     let lat = event.location?.latitude || 43.2965;
                     let lng = event.location?.longitude || 5.3698;
+                    const startStr = event.timings?.[0]?.begin || event.timings?.[0]?.start;
 
                     return {
                         name: title,
-                        date: event.dateRange || (event.timings?.[0]?.start ? formatDate(event.timings[0].start) : "Prochainement"),
+                        date: event.dateRange || (startStr ? formatDate(startStr) : "Prochainement"),
                         location: event.location?.name || event.location?.address || "Marseille",
                         image: image,
                         gps: [lat, lng],
                         type: category,
                         color: color,
                         rawTimings: event.timings,
-                        rawDate: event.timings?.[0]?.start,
+                        rawDate: startStr,
                         bookingUrl: event.registration?.[0]?.value || (event.slug ? `https://openagenda.com/steadygo/events/${event.slug}` : "") || "https://openagenda.com"
                     };
                 });
