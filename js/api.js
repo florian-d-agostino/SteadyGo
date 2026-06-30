@@ -121,18 +121,13 @@ const SteadyGoAPI = {
     /**
      * Helper to parse French date into ISO YYYY-MM-DD
      */
-
-
-
-
-    // Date day/month/year 
     parseMockDate(dateStr) {
         if (!dateStr) return "";
-        const parts = dateStr.split(" ");
-        if (parts.length < 3) return "";
+        const parts = dateStr.trim().split(" ");
+        if (parts.length < 2) return "";
         const day = parts[0].padStart(2, "0");
         const monthName = parts[1].toLowerCase();
-        const year = parts[2];
+        const year = parts[2] || new Date().getFullYear();
         
         const months = {
             "janvier": "01", "février": "02", "mars": "03", "avril": "04", "mai": "05", "juin": "06",
@@ -140,6 +135,19 @@ const SteadyGoAPI = {
         };
         const month = months[monthName] || "04";
         return `${year}-${month}-${day}`;
+    },
+
+    /**
+     * Format ISO date string into French date (e.g. '30 Juin' or '30 Juin 2026')
+     */
+    formatDate(isoString, includeYear = false) {
+        if (!isoString) return "";
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) return "";
+        const day = d.getDate();
+        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+        const monthName = months[d.getMonth()] || "Avril";
+        return includeYear ? `${day} ${monthName} ${d.getFullYear()}` : `${day} ${monthName}`;
     },
 
 
@@ -224,6 +232,8 @@ const SteadyGoAPI = {
      * Centralized helper to analyze event titles, resolve category, color, and correctly format images.
      * Prevents code duplication across carousel.js, event_page.js, and map.js.
      */
+
+
     getEventDetails(event) {
         const title = event.title?.fr || event.title || event.name || "Événement SteadyGo";
         const titleText = title.toLowerCase();
@@ -245,6 +255,10 @@ const SteadyGoAPI = {
             color = "#FFD319";
             fallbackImg = "./assets/img/famille.jpg";
         }
+
+
+
+
 
         // Resolve image URL
         let image = this.getAssetPath(fallbackImg);

@@ -229,22 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-    // Mock date parser
-    function parseMockDate(dateStr) {
-        if (!dateStr) return "";
-        var parts = dateStr.trim().split(" ");
-        if (parts.length < 2) return "";
-        var day = parts[0].padStart(2, "0");
-        var monthName = parts[1].toLowerCase();
-        var year = new Date().getFullYear();
-        
-        var months = {
-            "janvier": "01", "février": "02", "mars": "03", "avril": "04", "mai": "05", "juin": "06",
-            "juillet": "07", "août": "08", "septembre": "09", "octobre": "10", "novembre": "11", "décembre": "12"
-        };
-        var month = months[monthName] || "04";
-        return year + "-" + month + "-" + day;
-    }
+    // (Local parseMockDate removed, using SteadyGoAPI.parseMockDate instead)
 
 
 
@@ -278,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     eventDate.setHours(0, 0, 0, 0);
                     return eventDate.getTime() === targetDate.getTime();
                 } else {
-                    var dateStr = parseMockDate(event.rawDate);
+                    var dateStr = SteadyGoAPI.parseMockDate(event.rawDate);
                     if (dateStr) {
                         var eventDate = new Date(dateStr);
                         eventDate.setHours(0, 0, 0, 0);
@@ -357,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     return {
                         name: title,
-                        date: event.dateRange || (startStr ? formatDate(startStr) : "Prochainement"),
+                        date: event.dateRange || (startStr ? SteadyGoAPI.formatDate(startStr) : "Prochainement"),
                         location: event.location?.name || event.location?.address || "Marseille",
                         image: image,
                         gps: [lat, lng],
@@ -392,21 +377,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         filterAndDisplayPoints();
     }
-
-
-
-
-
-    // Format french date
-    function formatDate(isoString) {
-        const d = new Date(isoString);
-        const day = d.getDate();
-        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-        const monthName = months[d.getMonth()] || "Avril";
-        return `${day} ${monthName}`;
-    }
-
-
 
 
     // Listen to date changed event

@@ -69,25 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-    // ---------------------- FORMATTING UTILITIES ---------------------- 
-
-
-
-
-    // Format french date
-    function formatDate(isoString) {
-        const d = new Date(isoString);
-        const day = d.getDate();
-        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-        return `${day} ${months[d.getMonth()]} ${d.getFullYear()}`;
-    }
-
-
-
-
-
-
     // ------------------- FILTER AND RENDER ENGINE ------------------- 
 
 
@@ -137,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const mappedEvents = dateFilteredEvents.map(event => {
             const { title, category, image } = SteadyGoAPI.getEventDetails(event);
             const startStr = event.timings?.[0]?.begin || event.timings?.[0]?.start;
-            const dateStr = event.dateRange || (startStr ? formatDate(startStr) : "Prochainement");
+            const dateStr = event.dateRange || (startStr ? SteadyGoAPI.formatDate(startStr, true) : "Prochainement");
 
             return {
                 title,
